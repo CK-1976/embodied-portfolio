@@ -1,0 +1,59 @@
+name: 发布项目网站
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 读取代码
+        uses: actions/checkout@v6
+      - name: 准备 Chrome
+        id: chrome
+        uses: browser-actions/setup-chrome@v2
+        with:
+          chrome-version: '150.0.7871.115'
+          install-chromedriver: true
+      - name: 准备中文字体
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+      - name: 整理网站并生成 PDF
+        env:
+          PORTFOLIO_PRIVATE_PROFILE: ${{ secrets.PORTFOLIO_PRIVATE_PROFILE }}
+        run: |
+          mkdir -p _site
+          cp index.html app.js styles.css resume.html resume.js resume.css editor.html editor.js editor.css editor-storage.js content.json _site/
+          cp -R assets _site/
+          python3 prepare_site.py --site _site
+          python3 build_pdf.py --site _site --chrome "${{ steps.chrome.outputs.chrome-path }}" --chromedriver "${{ steps.chrome.outputs.chromedriver-path }}"
+          touch _site/.nojekyll
+      - name: 配置 Pages
+        uses: actions/configure-pages@v5
+      - name: 上传网站
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 发布 Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

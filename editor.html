@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>内容编辑 · __PORTFOLIO_NAME__项目网站</title>
+    <link rel="stylesheet" href="editor.css" />
+    <script type="module" src="editor.js"></script>
+  </head>
+  <body>
+    <header class="editor-header">
+      <div class="editor-identity"><span class="editor-brand">CY<span>·</span></span><div><strong>作品集编辑台</strong><small>所见页面与 PDF 同步预览</small></div></div>
+      <div class="header-actions"><span class="save-indicator" id="save-state" role="status">加载中</span><button type="button" id="header-preview">打开预览</button><a href="index.html" target="_blank" rel="noopener">查看公开网站 ↗</a></div>
+    </header>
+    <div class="editor-layout">
+      <aside class="editor-sidebar" aria-label="编辑目录">
+        <div class="sidebar-title">编辑目录 <span>CONTENT</span></div>
+        <button type="button" class="sidebar-link" data-mode="profile">首页与联系方式</button>
+        <button type="button" class="sidebar-link" data-mode="experiences">工作经历</button>
+        <button type="button" class="sidebar-link" data-mode="skills">能力与证书</button>
+        <div class="sidebar-heading">项目实践 <button id="add-project" type="button" title="新增项目" aria-label="新增项目">＋</button></div>
+        <div id="project-list"></div>
+        <div class="sidebar-publish"><span>发布步骤</span><p>编辑并检查右侧预览 → 导出发布包 → 将文件放入 GitHub 仓库，推送后公开网站与 PDF 自动更新。</p></div>
+      </aside>
+      <main class="editor-main">
+        <div class="editor-main-head"><div><p>PORTFOLIO STUDIO</p><h1 id="form-title">内容编辑</h1><span id="section-description">修改内容后右侧立即呈现实际网页效果。</span></div></div>
+        <div class="editor-actions"><button type="button" id="import-button">导入内容 JSON</button><button type="button" id="download-button">仅下载内容 JSON</button><button type="button" id="copy-private-button">复制私密资料</button><button type="button" id="save-folder-button">保存到本地项目目录</button><button type="button" id="package-button" class="primary-action">下载发布包 ↓</button></div>
+        <div class="editor-notice"><strong>如何发布</strong><span>图片和视频可以直接选择，右侧使用实际网页与简历模板预览。发布包与内容 JSON 会自动去掉姓名、邮箱等私密资料；这些资料由 GitHub Actions 密钥在发布时写入网站，修改后需单独更新密钥。</span></div>
+        <div id="editor-form"></div>
+      </main>
+      <aside class="preview-panel" id="preview-panel" aria-label="实时预览">
+        <div class="preview-header"><div><span class="preview-kicker">LIVE PREVIEW</span><strong>实际呈现</strong></div><div class="preview-controls"><button type="button" class="preview-tab active" data-preview="site" aria-pressed="true">网页</button><button type="button" class="preview-tab" data-preview="resume" aria-pressed="false">简历 PDF</button><button type="button" id="preview-expand" aria-label="放大预览" title="放大预览">⤢</button></div></div>
+        <div class="preview-description" id="preview-description">这里显示公开网页的实时草稿，点击项目卡片可查看项目经历。</div>
+        <div class="preview-frame-wrap" id="preview-frame-wrap"><iframe id="site-preview" title="网站实时预览" src="index.html?preview=1&amp;embed=1"></iframe><iframe id="resume-preview" title="简历实时预览" src="resume.html?preview=1&amp;embed=1" hidden></iframe><div id="resume-preview-spacer" hidden></div></div>
+        <div class="preview-footer"><span>当前浏览器草稿 · 尚未公开</span><a id="preview-open" href="index.html?preview=1" target="_blank" rel="noopener">新窗口查看 ↗</a></div>
+      </aside>
+    </div>
+    <input id="import-file" type="file" accept="application/json,.json" hidden />
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
