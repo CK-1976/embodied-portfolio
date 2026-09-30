@@ -27,11 +27,11 @@ python3 -m http.server 8000
 
 草稿和新素材存放在当前浏览器，清除浏览器网站数据会丢失未导出的修改；请及时保存到本地项目目录或下载发布包。编辑页无法直接替访客改动 GitHub 仓库。草稿预览里的 PDF 按钮打开当前草稿的打印页；公开网站上的按钮下载已发布的 PDF。
 
-姓名、缩写、邮箱和电话只在网站显示，不写进公开源码或发布包。若要修改这些资料，在编辑页点击“复制私密资料”，前往仓库 **Settings → Secrets and variables → Actions** 更新 `PORTFOLIO_PRIVATE_PROFILE` 密钥，内容是编辑页复制的 JSON。不要把密钥内容贴进仓库文件、提交记录、Issue 或 Actions 日志。下次推送或手动运行发布工作流时，网页与 PDF 会使用新的资料。
+姓名、缩写、邮箱和电话只在发布后的网页与 PDF 中显示，不写进公开源码或发布包。若要修改这些资料，在编辑页点击“复制私密资料”，前往仓库 **Settings → Secrets and variables → Actions** 更新 `PORTFOLIO_PRIVATE_PROFILE` 密钥，内容是编辑页复制的 JSON。不要把密钥内容贴进仓库文件、提交记录、Issue 或 Actions 日志。下次推送或手动运行发布工作流时，网页与 PDF 会使用新的资料。
 
 需要在本机手动生成带真实姓名的 PDF 时，先把网站文件复制到 Git 忽略的 `_site` 目录，再执行 `python3 prepare_site.py --site _site --profile-file /你的路径/private-profile.json` 和 `python3 build_pdf.py --site _site`。这一步需要 Chrome 或 Chromium；若安装了匹配的 ChromeDriver，会优先使用它。PDF 包含当前勾选“纳入 PDF 简历”的项目。不要把生成的 PDF 提交到公开源码仓库。
 
-编辑器里填写的电话会出现在公开内容文件和 PDF 中。当前版本公开两个邮箱，没有把原始简历中的电话放进网站。
+编辑器里填写的电话会在发布后显示于网页和 PDF，但不会写进公开仓库的 `content.json`。当前版本公开两个邮箱，没有把原始简历中的电话放进网站。
 
 ## 通过 GitHub Pages 发布
 
