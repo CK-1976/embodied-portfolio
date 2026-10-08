@@ -2,50 +2,101 @@
   "profile": {
     "name": "作品集作者",
     "initials": "PI",
-    "role": "具身智能 / 多模态 AI 工程",
+    "role": "机器人感知 / 多模态 AI 工程",
     "headline": "让智能体，\n走出对话框。",
-    "intro": "关注自然语言导航、多模态感知与机器人系统落地。经历覆盖算法调研、仿真适配、模型服务化与 API 交付。",
+    "intro": "关注语言导航、多模态感知与机器人系统落地。经历覆盖 Isaac Lab 仿真、RGB-D 航点生成、P230 无人机实机集成，以及模型部署与 API 交付。",
     "heroImage": "assets/images/drone-hardware.webp",
     "email": "",
     "emailAlt": "",
     "website": "https://ck-1976.github.io/embodied-portfolio/",
-    "location": "中国 · 重庆",
+    "location": "重庆 · 求职成都",
     "education": "重庆师范大学 · 智能科学与技术 · 本科（2026 届）",
-    "resumeSummary": "聚焦具身智能与多模态模型的工程落地，具备从算法调研、仿真验证到服务接口交付的实践经历。熟悉 Isaac Lab / Isaac Sim、PyTorch、FastAPI、Docker 等工具。",
-    "updated": "2026-09"
+    "resumeSummary": "具有无人机语言导航与多模态 AI 工程实践，完成 Isaac Lab 仿真适配、P230 实机导航集成，以及 RTX 3090 上的 Qwen 模型部署。",
+    "updated": "2026-10"
   },
   "navigation": [
-    { "label": "项目", "href": "#projects" },
-    { "label": "能力", "href": "#capabilities" },
-    { "label": "经历", "href": "#experience" },
-    { "label": "联系", "href": "#contact" }
+    {
+      "label": "项目",
+      "href": "#projects"
+    },
+    {
+      "label": "能力",
+      "href": "#capabilities"
+    },
+    {
+      "label": "经历",
+      "href": "#experience"
+    },
+    {
+      "label": "联系",
+      "href": "#contact"
+    }
   ],
   "capabilities": [
-    { "number": "01", "title": "导航与仿真", "description": "将自然语言任务拆解为可执行的导航动作，在 Isaac Lab 中验证无人机的视觉导航与避障流程。", "tags": ["Isaac Lab", "Isaac Sim", "VLN", "RGB-D"] },
-    { "number": "02", "title": "多模态感知", "description": "结合视觉语言模型与开放词汇目标检测，处理语言指代、物体记忆与视觉定位。", "tags": ["Qwen-VL", "Rex-Omni", "Agent"] },
-    { "number": "03", "title": "系统与交付", "description": "将模型能力封装为服务，处理异步任务、环境隔离、数据流水线与部署问题。", "tags": ["Python", "FastAPI", "Docker", "RabbitMQ"] }
+    {
+      "number": "01",
+      "title": "导航与机器人系统",
+      "description": "结合语言任务编排、视觉打点与 RGB-D 几何处理生成导航航点，连接 EGO-Planner 和无人机执行模块，并开展仿真与实机联调。",
+      "tags": [
+        "ROS1",
+        "RGB-D",
+        "EGO-Planner",
+        "Isaac Lab"
+      ]
+    },
+    {
+      "number": "02",
+      "title": "多模态感知",
+      "description": "应用视觉语言模型与目标检测处理语言指代和视觉定位，使用 vLLM 在 RTX 3090 上部署 Qwen，并实现视觉分析服务。",
+      "tags": [
+        "Qwen",
+        "vLLM",
+        "Rex-Omni",
+        "视觉定位"
+      ]
+    },
+    {
+      "number": "03",
+      "title": "系统与交付",
+      "description": "将模型能力封装为服务，处理异步任务、环境隔离、数据流水线与部署问题。",
+      "tags": [
+        "Python",
+        "FastAPI",
+        "Docker",
+        "RabbitMQ"
+      ]
+    }
   ],
   "experiences": [
     {
       "company": "超物智科（四川）科技有限公司",
       "role": "机器人算法工程师",
       "period": "2026.07.22 — 至今",
-      "description": "与上一段经历为同一负责人团队的连续任职；开展无人机自然语言导航项目，并完成灵巧手零件打印与组装。",
-      "bullets": ["完成无人机自然语言导航的仿真适配与演示", "完成灵巧手零件打印和实物组装"]
+      "description": "与上一段经历为同一负责人团队的连续任职；开展无人机语言导航仿真与 P230 实机集成，并完成灵巧手零件打印与组装。",
+      "bullets": [
+        "开展无人机语言导航仿真适配与 P230 实机联调",
+        "完成灵巧手零件打印和实物组装"
+      ]
     },
     {
       "company": "天润时代科技有限公司",
       "role": "大模型应用开发工程师",
       "period": "2025.05 — 2026.07.21",
       "description": "参与 AI 教育、无人机巡检与水质监测等场景的算法落地和 API 开发。",
-      "bullets": ["构建视觉分析 Agent 的云端语义理解与本地检测链路", "交付 AI 判卷流水线及水质预测服务模块"]
+      "bullets": [
+        "构建视觉分析 Agent 的云端语义理解与本地检测链路",
+        "交付 AI 判卷流水线及水质预测服务模块"
+      ]
     },
     {
       "company": "重庆中联信息产业有限公司",
       "role": "全栈开发工程师",
       "period": "2024.08 — 2025.02",
       "description": "参与医疗数据采集系统重构和 AI 文件管理系统开发。",
-      "bullets": ["开发异构医疗数据转换逻辑，支撑 300 余家医院部署", "带领 3 人团队开发文档智能分类与标签功能"]
+      "bullets": [
+        "开发异构医疗数据转换逻辑，支撑 300 余家医院部署",
+        "带领 3 人团队开发文档智能分类与标签功能"
+      ]
     }
   ],
   "projects": [
@@ -56,27 +107,84 @@
       "visible": true,
       "includeInResume": true,
       "eyebrow": "FEATURED PROJECT / 01",
-      "title": "无人机自然语言导航",
-      "subtitle": "从语言指令到可执行的飞行轨迹",
+      "title": "无人机语言导航与环绕采集",
+      "subtitle": "从语言指令、视觉定位到实机导航与采集",
       "period": "2026.07 起",
       "context": "超物智科（四川）科技有限公司 · 项目经历",
-      "role": "仿真适配、导航逻辑复现与系统集成",
-      "summary": "在 Isaac Lab 中搭建导航测试场景，将视觉语言导航逻辑适配到无人机定高飞行，并围绕长程任务、感知延迟和避障组织执行链路。",
-      "challenge": "自然语言指令跨度长，视觉推理耗时与飞行控制频率不同；在动态场景中需要兼顾目标跟踪和安全避障。",
-      "approach": "把任务拆解、视觉目标选择与底层飞行控制分层处理；通过异步推理与飞行状态检查减少控制卡顿，并在 RGB-D 仿真场景中验证。",
-      "outcome": "已完成 Isaac Lab 中的无人机定高自然语言导航演示，保留多段不同目标和环绕任务的录屏。",
-      "contributions": ["搭建 Isaac Lab 导航测试场景并适配无人机飞行控制", "复现并整合视觉语言导航关键逻辑，处理异步推理与动作执行的衔接", "设计目标到达、环绕与不同目标物的仿真演示"],
-      "resumeBullets": ["在 Isaac Lab 中搭建无人机导航测试场景，将视觉语言导航逻辑适配到定高飞行，并完成多目标指令演示。", "通过任务分层、异步推理与状态检查，处理长程指令执行和推理延迟对飞行控制的影响。"],
-      "tags": ["Isaac Lab", "VLN", "RGB-D", "Python", "异步推理"],
+      "role": "任务编排、RGB-D 航点生成与实机集成",
+      "summary": "基于 Qwen 拆解语言任务并定位图像目标，结合 RGB-D 和相机内参生成航点，通过 ROS/rosbridge 对接 P230 无人机、EGO-Planner 导航与已有环绕控制。保留 Isaac Lab 仿真和实机演示。",
+      "challenge": "语言任务需要转换为可执行的导航目标；模型推理延迟、RGB-D 与位姿时间对应，以及导航和环绕的控制交接都会影响执行。",
+      "approach": "采用规则与模型结合的任务拆解并校验结构化输出。将视觉打点与对齐深度反投影为目标前停距的相机系航点，交给机载桥使用采集时刻 TF 转换到世界系并接入 EGO。收到导航完成回执后，再启动已有 YOLO 跟踪和规则环绕控制。",
+      "outcome": "完成 Isaac Lab 仿真演示，保留 P230 无人机导航至蓝色椅子并环绕采集的实机录像与任务记录。导航避障由 EGO 负责；环绕复用已有视觉控制，未接入 EGO 路径避障。",
+      "contributions": [
+        "实现语言任务拆解、视觉打点接口、RGB-D 航点生成、ROS 对接及任务状态管理，并负责实机调试",
+        "使用 vLLM 在本机 RTX 3090 上部署 Qwen，提供任务拆解和视觉打点模型服务",
+        "集成无人机已有 EGO-Planner、VINS/PX4 与 YOLO 模块，接入原有环绕控制并串联导航与采集任务",
+        "完成 Isaac Lab 导航仿真适配，保留不同目标指令的演示素材"
+      ],
+      "resumeBullets": [
+        "实现 Qwen 任务拆解与视觉打点，经 RGB-D 反投影和历史 TF 生成航点，通过 ROS/rosbridge 集成 P230 与 EGO-Planner。",
+        "用 vLLM 在 RTX 3090 部署 Qwen，接入已有 YOLO 与环绕控制，完成蓝色椅子导航和环绕采集实机演示。"
+      ],
+      "tags": [
+        "Qwen",
+        "vLLM",
+        "RGB-D",
+        "ROS1",
+        "EGO-Planner",
+        "Isaac Lab"
+      ],
       "cover": "assets/images/drone-hardware.webp",
-      "coverAlt": "无人机硬件近景，橙色桨叶和机载设备可见",
+      "coverAlt": "无人机硬件近景，点击可观看蓝色椅子导航与环绕采集实机录像",
       "media": [
-        { "type": "video", "src": "assets/video/navigation-orbit.mp4", "poster": "assets/images/navigation-orbit.jpg", "title": "导航并环绕", "caption": "Isaac Lab 仿真录屏节选 · 25 秒" },
-        { "type": "video", "src": "assets/video/navigation-right.mp4", "poster": "assets/images/navigation-right.jpg", "title": "向右导航", "caption": "Isaac Lab 仿真录屏节选 · 25 秒" },
-        { "type": "video", "src": "assets/video/target-left.mp4", "poster": "assets/images/target-left.jpg", "title": "飞向左侧箱子", "caption": "目标定位与路径演示节选 · 22 秒" },
-        { "type": "video", "src": "assets/video/target-right.mp4", "poster": "assets/images/target-right.jpg", "title": "飞向右侧箱子", "caption": "目标定位与路径演示节选 · 22 秒" },
-        { "type": "video", "src": "assets/video/target-case.mp4", "poster": "assets/images/target-case.jpg", "title": "飞向黑色手提箱", "caption": "目标定位与路径演示节选 · 22 秒" },
-        { "type": "image", "src": "assets/images/drone-hardware.webp", "title": "无人机硬件", "caption": "项目相关设备照片" }
+        {
+          "type": "video",
+          "src": "assets/video/uav-chair-inspection.mp4",
+          "poster": "assets/images/uav-chair-inspection.jpg",
+          "title": "实机：导航至蓝色椅子并环绕采集",
+          "caption": "P230 实机录像 · 2 分 49 秒 · 原速，已移除现场音轨；后续视频为仿真演示"
+        },
+        {
+          "type": "video",
+          "src": "assets/video/navigation-orbit.mp4",
+          "poster": "assets/images/navigation-orbit.jpg",
+          "title": "导航并环绕",
+          "caption": "Isaac Lab 仿真录屏节选 · 25 秒"
+        },
+        {
+          "type": "video",
+          "src": "assets/video/navigation-right.mp4",
+          "poster": "assets/images/navigation-right.jpg",
+          "title": "向右导航",
+          "caption": "Isaac Lab 仿真录屏节选 · 25 秒"
+        },
+        {
+          "type": "video",
+          "src": "assets/video/target-left.mp4",
+          "poster": "assets/images/target-left.jpg",
+          "title": "飞向左侧箱子",
+          "caption": "目标定位与路径演示节选 · 22 秒"
+        },
+        {
+          "type": "video",
+          "src": "assets/video/target-right.mp4",
+          "poster": "assets/images/target-right.jpg",
+          "title": "飞向右侧箱子",
+          "caption": "目标定位与路径演示节选 · 22 秒"
+        },
+        {
+          "type": "video",
+          "src": "assets/video/target-case.mp4",
+          "poster": "assets/images/target-case.jpg",
+          "title": "飞向黑色手提箱",
+          "caption": "目标定位与路径演示节选 · 22 秒"
+        },
+        {
+          "type": "image",
+          "src": "assets/images/drone-hardware.webp",
+          "title": "无人机硬件",
+          "caption": "项目相关设备照片"
+        }
       ]
     },
     {
@@ -95,9 +203,21 @@
       "challenge": "传统检测模型难以直接理解对话中的目标描述，多模型依赖的 CUDA 环境也存在冲突。",
       "approach": "采用云端语义理解与本地目标检测的组合架构，使用 Docker Compose 隔离运行环境。",
       "outcome": "形成多模态智能体检测链路，支持根据对话描述识别自定义物体。",
-      "contributions": ["设计 Qwen-VL-Plus 与 Rex-Omni 协同的分析链路", "加入物体记忆机制，处理对话中持续出现的目标", "通过 Docker Compose 隔离依赖并部署多模型子系统"],
-      "resumeBullets": ["设计 Qwen-VL-Plus 云端语义理解与 Rex-Omni 本地目标检测的组合架构，实现对话中目标的视觉定位。", "使用 Docker Compose 隔离不同 CUDA 依赖，稳定部署多模型子系统。"],
-      "tags": ["Qwen-VL-Plus", "Rex-Omni", "Docker Compose", "Agent"],
+      "contributions": [
+        "设计 Qwen-VL-Plus 与 Rex-Omni 协同的分析链路",
+        "加入物体记忆机制，处理对话中持续出现的目标",
+        "通过 Docker Compose 隔离依赖并部署多模型子系统"
+      ],
+      "resumeBullets": [
+        "设计 Qwen-VL-Plus 云端语义理解与 Rex-Omni 本地目标检测的组合架构，实现对话中目标的视觉定位。",
+        "使用 Docker Compose 隔离不同 CUDA 依赖，稳定部署多模型子系统。"
+      ],
+      "tags": [
+        "Qwen-VL-Plus",
+        "Rex-Omni",
+        "Docker Compose",
+        "Agent"
+      ],
       "visual": "vision",
       "media": []
     },
@@ -117,9 +237,20 @@
       "challenge": "扫描文档需要先恢复题目结构，VLM 批改任务则受 IO 等待影响。",
       "approach": "以 MinerU 处理文档版面，使用 ThreadPoolExecutor 并行执行批改任务，通过 RabbitMQ 对接 Java 扫描服务。",
       "outcome": "形成从硬件扫描到云端批改的自动化链路，为后续分析报告提供数据基础。",
-      "contributions": ["搭建 MinerU → 坐标映射 → VLM 批改的处理链", "设计并行批改任务和数据记录结构", "通过 RabbitMQ 集成上游扫描服务"],
-      "resumeBullets": ["基于 MinerU、坐标映射与 VLM 构建并行批改流水线，并使用 RabbitMQ 对接 Java 扫描服务。"],
-      "tags": ["VLM", "MinerU", "ThreadPoolExecutor", "RabbitMQ"],
+      "contributions": [
+        "搭建 MinerU → 坐标映射 → VLM 批改的处理链",
+        "设计并行批改任务和数据记录结构",
+        "通过 RabbitMQ 集成上游扫描服务"
+      ],
+      "resumeBullets": [
+        "基于 MinerU、坐标映射与 VLM 构建并行批改流水线，并使用 RabbitMQ 对接 Java 扫描服务。"
+      ],
+      "tags": [
+        "VLM",
+        "MinerU",
+        "ThreadPoolExecutor",
+        "RabbitMQ"
+      ],
       "visual": "grading",
       "media": []
     },
@@ -139,9 +270,20 @@
       "challenge": "仅用地理距离难以反映污染物沿河流的真实传输方向。",
       "approach": "把河道拓扑编码为有向图，再结合时序数据建模；用 FastAPI 封装训练和推理能力。",
       "outcome": "完成核心预测模块与服务接口交付，支持按需触发训练和预测。",
-      "contributions": ["构建基于河流上下游拓扑的有向图", "实现 T-GCN 预测模型与训练流程", "封装 FastAPI 训练及预测接口"],
-      "resumeBullets": ["基于河流上下游拓扑构建有向图并实现 T-GCN 预测模型，使用 FastAPI 封装训练与预测接口。"],
-      "tags": ["T-GCN", "PyTorch", "FastAPI", "时空图建模"],
+      "contributions": [
+        "构建基于河流上下游拓扑的有向图",
+        "实现 T-GCN 预测模型与训练流程",
+        "封装 FastAPI 训练及预测接口"
+      ],
+      "resumeBullets": [
+        "基于河流上下游拓扑构建有向图并实现 T-GCN 预测模型，使用 FastAPI 封装训练与预测接口。"
+      ],
+      "tags": [
+        "T-GCN",
+        "PyTorch",
+        "FastAPI",
+        "时空图建模"
+      ],
       "visual": "water",
       "media": []
     },
@@ -161,15 +303,31 @@
       "challenge": "",
       "approach": "",
       "outcome": "完成实物组装；训练尚未开展，因此不将训练成果写入简历。",
-      "contributions": ["完成灵巧手零件打印", "完成灵巧手实物组装"],
+      "contributions": [
+        "完成灵巧手零件打印",
+        "完成灵巧手实物组装"
+      ],
       "resumeBullets": [],
-      "tags": ["灵巧手", "零件打印", "实物组装"],
+      "tags": [
+        "灵巧手",
+        "零件打印",
+        "实物组装"
+      ],
       "cover": "assets/images/dexterous-hand.jpg",
       "coverAlt": "桌面上的灵巧手实物演示画面",
       "media": [
-        { "type": "video", "src": "assets/video/dexterous-hand.mp4", "poster": "assets/images/dexterous-hand.jpg", "title": "灵巧手实物演示", "caption": "原始素材节选 · 25 秒" }
+        {
+          "type": "video",
+          "src": "assets/video/dexterous-hand.mp4",
+          "poster": "assets/images/dexterous-hand.jpg",
+          "title": "灵巧手实物演示",
+          "caption": "原始素材节选 · 25 秒"
+        }
       ]
     }
   ],
-  "certificates": ["HarmonyOS 应用开发者高级认证", "日语 N3"]
+  "certificates": [
+    "HarmonyOS 应用开发者高级认证",
+    "日语 N3"
+  ]
 }
