@@ -213,18 +213,19 @@
         "将 Rex-Omni 目标检测封装为可调用的 FastAPI 服务，并对接图片上传、类别参数及检测结果",
         "设计 Qwen 目标提取与工具调用提示词，保留关键属性，并处理中文、英文及混合描述",
         "使用 LangGraph 编排模型与检测工具，将检测坐标和标注图交给模型生成解释",
-        "接入会话上下文保存，并使用 Docker Compose 组织检测与 Agent 服务"
+        "接入会话上下文保存，使用 Docker 在 A100 环境部署服务，并用 Docker Compose 组织检测与 Agent 服务"
       ],
       "resumeBullets": [
         "封装 Rex-Omni 的 FastAPI 检测接口，用 Qwen 从中英文对话提取目标描述，通过工具调用返回检测框和标注图。",
-        "用 LangGraph 编排模型与检测工具，通过会话保存对话上下文，支持基于检测结果继续问答。"
+        "用 LangGraph 编排模型与检测工具、保存会话上下文，使用 Docker 在 A100 环境部署服务。"
       ],
       "tags": [
         "Qwen-VL",
         "Rex-Omni",
         "FastAPI",
         "LangGraph",
-        "Docker Compose"
+        "Docker Compose",
+        "A100"
       ],
       "visual": "vision",
       "media": []
