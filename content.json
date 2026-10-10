@@ -5,7 +5,7 @@
     "role": "机器人感知 / 多模态 AI 工程",
     "headline": "让智能体，\n走出对话框。",
     "intro": "关注语言导航、多模态感知与机器人系统落地。经历覆盖 Isaac Lab 仿真、RGB-D 航点生成、P230 无人机实机集成，以及模型部署与 API 交付。",
-    "heroImage": "assets/images/drone-hardware.webp",
+    "heroImage": "assets/images/p230.jpg",
     "email": "",
     "emailAlt": "",
     "website": "https://ck-1976.github.io/embodied-portfolio/",
@@ -118,7 +118,7 @@
       "outcome": "完成 Isaac Lab 仿真演示，保留 P230 无人机导航至蓝色椅子并环绕采集的实机录像与任务记录。导航避障由 EGO 负责；环绕复用已有视觉控制，未接入 EGO 路径避障。",
       "contributions": [
         "实现语言任务拆解、视觉打点接口、RGB-D 航点生成、ROS 对接及任务状态管理，并负责实机调试",
-        "使用 vLLM 在 RTX 3090 上部署 Qwen3.8-27B 社区量化模型，通过不同提示词提供任务拆解与视觉打点服务；调整提示词、模型选择及非思考模式以改善输出",
+        "使用 vLLM 在 RTX 3090 上部署 Qwen3.8-27B 社区量化模型；对比本地 Qwen3.5-9B 与云端 Qwen 服务，结合复杂指令打点表现、响应延迟及离线要求选择模型，调整提示词和非思考模式",
         "集成无人机已有 EGO-Planner、VINS/PX4 与 YOLO 模块，接入原有环绕控制并串联导航与采集任务",
         "完成 Isaac Lab 导航仿真适配，保留不同目标指令的演示素材"
       ],
@@ -134,8 +134,8 @@
         "EGO-Planner",
         "Isaac Lab"
       ],
-      "cover": "assets/images/drone-hardware.webp",
-      "coverAlt": "无人机硬件近景，点击可观看蓝色椅子导航与环绕采集实机录像",
+      "cover": "assets/images/p230.jpg",
+      "coverAlt": "P230 无人机正面实物照片，可见相机、机架与螺旋桨保护架",
       "media": [
         {
           "type": "video",
@@ -184,6 +184,12 @@
           "src": "assets/images/drone-hardware.webp",
           "title": "无人机硬件",
           "caption": "项目相关设备照片"
+        },
+        {
+          "type": "image",
+          "src": "assets/images/p230.jpg",
+          "title": "P230 无人机实物",
+          "caption": "语言导航与环绕采集使用的 P230 平台正面照片"
         }
       ]
     },
