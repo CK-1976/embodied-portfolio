@@ -240,27 +240,28 @@
       "includeInResume": true,
       "eyebrow": "AI ENGINEERING / 03",
       "title": "AI 判卷系统",
-      "subtitle": "从扫描输入到批改数据的流水线",
+      "subtitle": "从试卷上传到批改与分析报告",
       "period": "2025 — 2026",
       "context": "天润时代科技有限公司 · 项目经历",
-      "role": "并行处理流水线与系统集成",
-      "summary": "建立版面切割、坐标映射和 VLM 并行批改链路，并对接扫描服务与批改数据记录。",
-      "challenge": "扫描文档需要先恢复题目结构，VLM 批改任务则受 IO 等待影响。",
-      "approach": "以 MinerU 处理文档版面，使用 ThreadPoolExecutor 并行执行批改任务，通过 RabbitMQ 对接 Java 扫描服务。",
-      "outcome": "形成从硬件扫描到云端批改的自动化链路，为后续分析报告提供数据基础。",
+      "role": "Python 判卷后端开发",
+      "summary": "负责标准卷与学生卷上传、题区分割、VLM 批改及分析报告数据生成，项目已与合作小学开展试用。",
+      "challenge": "批量试卷需要保持题区、页码、题号与作答的对应，并将批改结果组织为可查看的分析数据。",
+      "approach": "集成 MinerU 解析题区并进行裁剪与坐标映射，调用 VLM 提取作答和批改；以线程池调度试卷级处理，保存题级结果并汇总分析报告数据。",
+      "outcome": "已与合作小学开展试用，形成答卷结果、题区得分和个人/知识点报告的业务流程。与负责 Java 权限管理及前端的同事协作完成交付。",
       "contributions": [
-        "搭建 MinerU → 坐标映射 → VLM 批改的处理链",
-        "设计并行批改任务和数据记录结构",
-        "通过 RabbitMQ 集成上游扫描服务"
+        "实现标准卷与学生卷上传、题区分割和裁剪，集成 MinerU 并处理坐标映射",
+        "实现 VLM 作答提取与批改流程，调度试卷级并行处理并记录题级结果",
+        "生成成绩、知识点与错题分析所需的后端报告数据"
       ],
       "resumeBullets": [
-        "基于 MinerU、坐标映射与 VLM 构建并行批改流水线，并使用 RabbitMQ 对接 Java 扫描服务。"
+        "负责标准卷与学生卷上传、题区分割和 VLM 批改，集成 MinerU 并实现坐标映射与试卷级并行处理。",
+        "实现批改结果记录与分析报告数据生成，项目已与合作小学开展试用。"
       ],
       "tags": [
         "VLM",
         "MinerU",
         "ThreadPoolExecutor",
-        "RabbitMQ"
+        "FastAPI"
       ],
       "visual": "grading",
       "media": []

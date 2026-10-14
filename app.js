@@ -45,7 +45,7 @@ function visual(project) {
   }
   const visualSteps = {
     vision: ['语言描述', 'Qwen-VL', 'Rex-Omni', '视觉定位'],
-    grading: ['文档扫描', '版面切割', 'VLM 批改', '数据记录'],
+    grading: ['试卷上传', '题区分割', 'VLM 批改', '分析报告'],
     water: ['河流拓扑', '时序观测', 'T-GCN', '预测 API']
   };
   const steps = visualSteps[project.visual] || ['输入', '分析', '执行', '结果'];
