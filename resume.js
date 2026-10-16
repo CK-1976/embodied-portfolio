@@ -1,3 +1,4 @@
+import {previewDraft, watchPublished} from './content-state.js';
 const root = document.querySelector('#resume-root');
 const printButton = document.querySelector('#print-button');
 
@@ -24,13 +25,12 @@ function render(data) {
 printButton.addEventListener('click', () => window.print());
 
 try {
-  const response = await fetch('content.json');
+  const response = await fetch('content.json', {cache:'no-store'});
   if (!response.ok) throw new Error('内容文件无法读取');
   const published = await response.json();
-  const preview = new URLSearchParams(location.search).has('preview') ? localStorage.getItem('portfolio-draft') : null;
-  let draft;
-  try { draft = preview ? JSON.parse(preview) : null; } catch { draft = null; }
-  render(draft?.profile && Array.isArray(draft.projects) && draft.projects.every((project) => project && typeof project === 'object') ? draft : published);
+  const preview = new URLSearchParams(location.search).has('preview');
+  render(preview ? previewDraft(published) : published);
+  if (!preview) watchPublished(published, render);
   if (new URLSearchParams(location.search).has('print')) setTimeout(() => window.print(), 550);
 } catch (error) {
   document.body.dataset.resumeError = error.message;

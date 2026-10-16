@@ -132,6 +132,8 @@ img { display: block; max-width: 100%; }
 .diagram-cover { display: flex; flex-direction: column; justify-content: space-between; padding: 25px; isolation: isolate; }
 .diagram-vision { color: #dceae2; background: radial-gradient(circle at 85% 10%, #315b50, transparent 33%), #1b3e37; }
 .diagram-grading { color: #f0e7d8; background: radial-gradient(circle at 20% 80%, #63574c, transparent 40%), #292f2e; }
+.media-group { min-width: 0; margin-top: 18px; }
+.media-group h4 { margin: 0 0 9px; font-size: 11px; font-weight: 600; color: var(--muted, #64756c); }
 .diagram-water { color: #e6f0e7; background: radial-gradient(circle at 15% 15%, #386c71, transparent 42%), #1b3e43; }
 .diagram-default { color: white; background: #28413c; }
 .diagram-cover:before { content: ''; position: absolute; inset: 0; z-index: -1; opacity: .12; background-image: linear-gradient(currentColor 1px,transparent 1px),linear-gradient(90deg,currentColor 1px,transparent 1px); background-size: 37px 37px; }
@@ -244,4 +246,8 @@ img { display: block; max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *:before, *:after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+@media (min-width: 781px) {
+  /* 素材增加时保持封面比例，阅读项目经历时封面随滚动停留。 */
+  .featured .image-cover { align-self:start; position:sticky; top:96px; height:640px; min-height:0; }
 }

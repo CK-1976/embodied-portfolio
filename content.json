@@ -142,54 +142,94 @@
           "src": "assets/video/uav-chair-inspection.mp4",
           "poster": "assets/images/uav-chair-inspection.jpg",
           "title": "实机：导航至蓝色椅子并环绕采集",
-          "caption": "P230 实机录像 · 2 分 49 秒 · 原速，已移除现场音轨；后续视频为仿真演示"
+          "caption": "P230 实机录像 · 2 分 49 秒 · 原速，已移除现场音轨；后续视频为仿真演示",
+          "group": "实机演示"
+        },
+        {
+          "type": "video",
+          "src": "assets/video/uav-sim-flight-red.mp4",
+          "poster": "assets/images/uav-sim-flight-red.jpg",
+          "title": "仿真飞行 · raw2red",
+          "caption": "仿真飞行完整录像 · 23.4 秒 · 原速，公开副本无音轨",
+          "group": "仿真飞行"
+        },
+        {
+          "type": "video",
+          "src": "assets/video/uav-sim-flight-white.mp4",
+          "poster": "assets/images/uav-sim-flight-white.jpg",
+          "title": "仿真飞行 · raw2white",
+          "caption": "仿真飞行完整录像 · 30 秒 · 原速，公开副本无音轨",
+          "group": "仿真飞行"
+        },
+        {
+          "type": "video",
+          "src": "assets/video/uav-sim-capture-1.mp4",
+          "poster": "assets/images/uav-sim-capture-1.jpg",
+          "title": "仿真数采 · 演示一",
+          "caption": "仿真数采完整录像 · 1 分 13.4 秒 · 原速，公开副本无音轨",
+          "group": "仿真数采"
+        },
+        {
+          "type": "video",
+          "src": "assets/video/uav-sim-capture-2.mp4",
+          "poster": "assets/images/uav-sim-capture-2.jpg",
+          "title": "仿真数采 · 演示二",
+          "caption": "仿真数采完整录像 · 1 分 13.4 秒 · 原速，公开副本无音轨",
+          "group": "仿真数采"
         },
         {
           "type": "video",
           "src": "assets/video/navigation-orbit.mp4",
           "poster": "assets/images/navigation-orbit.jpg",
           "title": "导航并环绕",
-          "caption": "Isaac Lab 仿真录屏节选 · 25 秒"
+          "caption": "Isaac Lab 仿真录屏节选 · 25 秒",
+          "group": "仿真数采"
         },
         {
           "type": "video",
           "src": "assets/video/navigation-right.mp4",
           "poster": "assets/images/navigation-right.jpg",
           "title": "向右导航",
-          "caption": "Isaac Lab 仿真录屏节选 · 25 秒"
+          "caption": "Isaac Lab 仿真录屏节选 · 25 秒",
+          "group": "仿真飞行"
         },
         {
           "type": "video",
           "src": "assets/video/target-left.mp4",
           "poster": "assets/images/target-left.jpg",
           "title": "飞向左侧箱子",
-          "caption": "目标定位与路径演示节选 · 22 秒"
+          "caption": "目标定位与路径演示节选 · 22 秒",
+          "group": "仿真飞行"
         },
         {
           "type": "video",
           "src": "assets/video/target-right.mp4",
           "poster": "assets/images/target-right.jpg",
           "title": "飞向右侧箱子",
-          "caption": "目标定位与路径演示节选 · 22 秒"
+          "caption": "目标定位与路径演示节选 · 22 秒",
+          "group": "仿真飞行"
         },
         {
           "type": "video",
           "src": "assets/video/target-case.mp4",
           "poster": "assets/images/target-case.jpg",
           "title": "飞向黑色手提箱",
-          "caption": "目标定位与路径演示节选 · 22 秒"
+          "caption": "目标定位与路径演示节选 · 22 秒",
+          "group": "仿真飞行"
         },
         {
           "type": "image",
           "src": "assets/images/drone-hardware.webp",
           "title": "无人机硬件",
-          "caption": "项目相关设备照片"
+          "caption": "项目相关设备照片",
+          "group": "项目图片"
         },
         {
           "type": "image",
           "src": "assets/images/p230.jpg",
           "title": "P230 无人机实物",
-          "caption": "语言导航与环绕采集使用的 P230 平台正面照片"
+          "caption": "语言导航与环绕采集使用的 P230 平台正面照片",
+          "group": "项目图片"
         }
       ]
     },

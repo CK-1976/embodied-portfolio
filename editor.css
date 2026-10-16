@@ -31,7 +31,7 @@ a { color:inherit; text-decoration:none; }
 .editor-main-head h1 { margin:0; font:600 33px "Noto Serif CJK SC","SimSun",serif; }
 .editor-actions { display:flex; gap:8px; }
 .editor-actions button,.form-actions button { border:1px solid var(--ink); background:transparent; color:var(--ink); padding:10px 12px; font-size:11px; }
-.editor-actions button:last-of-type { background:var(--ink); color:white; }
+.editor-actions .primary-action { background:var(--ink); color:white; }
 .editor-actions button:hover,.form-actions button:hover { background:var(--accent); color:white; border-color:var(--accent); }
 .editor-notice { border-left:3px solid var(--accent); background:#fff9ef; padding:13px 17px; margin:27px 0; font-size:12px; line-height:1.7; color:#775b4c; }
 .editor-notice code { font-family:monospace; }
@@ -145,3 +145,9 @@ a { color:inherit; text-decoration:none; }
 @media(max-width:1350px) { .editor-layout { grid-template-columns:190px minmax(350px,1fr) minmax(360px,42vw); } .editor-main { padding-inline:20px; } .form-grid { grid-template-columns:1fr; } .field.full { grid-column:auto; } }
 @media(max-width:1040px) { .editor-layout { grid-template-columns:180px minmax(0,1fr); } .preview-panel { position:relative; top:auto; height:680px; grid-column:2; border-left:0; border-top:1px solid #cdd8ce; } .editor-main { grid-column:2; } }
 @media(max-width:700px) { .editor-header { padding:0 14px; } .header-actions { gap:6px; } .header-actions a { display:none; } .header-actions button { font-size:10px; padding:7px; } .save-indicator { display:none; } .editor-layout { display:block; } .editor-sidebar { position:relative; top:auto; height:auto; padding:12px; } .sidebar-title,.sidebar-publish { display:none; } .editor-sidebar > .sidebar-link { width:auto; display:inline-block; } #project-list { display:flex; overflow:auto; } .project-link { width:auto; flex:none; } .editor-main { padding:24px 15px 45px; } .preview-panel { height:680px; } .editor-notice { flex-direction:column; gap:4px; } .media-grid { grid-template-columns:100px minmax(0,1fr); } .media-preview { width:100px; height:100px; } }
+
+.editor-brand { min-width:48px; font-size:18px; }
+.editor-actions [hidden] { display:none; }
+.publish-status { margin:0 0 20px; padding:14px 18px; border:1px solid #ccd9d0; background:#f0f5f1; color:#294b36; font-size:13px; line-height:1.7; border-radius:8px; overflow-wrap:anywhere; }
+.publish-status[data-state="error"] { background:#fff3ed; border-color:#e9c9b9; color:#8f432c; }
+.publish-status a { color:inherit; margin-left:12px; text-decoration:underline; }

@@ -1,3 +1,4 @@
+import {archiveDraft, contentSignature, restoreDraft, announceSaved} from './content-state.js';
 import {createPublishZip, deleteMediaFile, loadMediaFiles, saveMediaFile} from './editor-storage.js';
 
 const list = document.querySelector('#project-list');
@@ -15,6 +16,10 @@ const sentRevision = new WeakMap();
 const pendingUploads = new Set();
 const sourceProfile = {name:'作品集作者', initials:'PI', email:'', emailAlt:'', phone:''};
 let data;
+let baseline;
+let savedRevision;
+let publishConfig;
+let publishing = false;
 let mode = 'profile';
 let projectIndex = 0;
 let mediaRevision = 0;
@@ -81,7 +86,9 @@ function filePicker(label, kind, index = null) {
 function saveDraft() {
   try {
     localStorage.setItem('portfolio-draft', JSON.stringify(data));
-    saveState.textContent = '草稿已保存';
+    localStorage.setItem('portfolio-draft-base', baseline);
+    document.querySelector('#editor-initials').textContent = data.profile.initials || 'PI';
+    saveState.textContent = '草稿已保存 · 尚未发布';
   } catch {
     saveState.textContent = '草稿保存失败';
     notify('浏览器存储空间不足，请及时下载发布包。', true);
@@ -121,7 +128,7 @@ function renderProfile() {
     <div class="form-grid">${field('首页大标题', 'headline', p.headline, {long:true,rows:2})}${field('首页简介', 'intro', p.intro, {long:true,rows:3})}${field('网站身份描述', 'role', p.role)}${field('姓名（私密资料）', 'name', p.name)}${field('姓名缩写（私密资料）', 'initials', p.initials)}${field('最后更新月份', 'updated', p.updated)}</div>
     <div class="form-divider"></div><h3 class="form-subheading">首页主图</h3><div class="media-grid"><div class="media-preview">${imagePreview(p.heroImage || 'assets/images/drone-hardware.webp', '首页主图')}</div><div class="media-inputs">${filePicker('选择或拖入首页图片', 'hero')}<span class="file-picked">${escapeHtml(p.heroImage || 'assets/images/drone-hardware.webp')}</span></div></div>
   </section><section class="form-section">${sectionHeading('联系与教育', '网站 + 简历')}
-    <div class="form-grid">${field('主要邮箱（私密资料）', 'email', p.email)}${field('备用邮箱（私密资料）', 'emailAlt', p.emailAlt || '')}${field('所在地', 'location', p.location)}${field('作品集公开网址', 'website', p.website || '')}${field('教育背景', 'education', p.education, {long:true,rows:2})}${field('电话（填写后会公开）', 'phone', p.phone || '')}</div><p class="form-note">姓名、缩写、邮箱与电话不写入公开 GitHub 仓库。修改后点击“复制私密资料”，并更新仓库 Actions 密钥 PORTFOLIO_PRIVATE_PROFILE。</p>
+    <div class="form-grid">${field('主要邮箱（私密资料）', 'email', p.email)}${field('备用邮箱（私密资料）', 'emailAlt', p.emailAlt || '')}${field('所在地', 'location', p.location)}${field('作品集公开网址', 'website', p.website || '')}${field('教育背景', 'education', p.education, {long:true,rows:2})}${field('电话（填写后会公开）', 'phone', p.phone || '')}</div><p class="form-note">姓名、缩写、邮箱与电话单独保存在仓库外。本机“保存并发布”会自动同步发布资料；导出的公开内容仍使用占位信息。</p>
   </section><section class="form-section">${sectionHeading('简历个人简介', '只显示在 PDF')}
     <div class="form-grid">${field('个人简介', 'resumeSummary', p.resumeSummary, {long:true,rows:4})}</div>
   </section>`;
@@ -171,7 +178,7 @@ function renderProject() {
     <p class="form-note">直接选择图片或 MP4 视频，完成后可在右侧项目卡片中打开。每个文件不超过 80 MB；视频建议先压缩到便于网页播放的大小。</p>
     ${(p.media || []).map((media, index) => `<div class="media-card" data-media-index="${index}"><div class="media-edit-head"><strong>${String(index + 1).padStart(2, '0')} / ${escapeHtml(media.title || (media.type === 'video' ? '视频' : '图片'))}</strong><button type="button" data-remove-media="${index}">删除素材</button></div>
       <div class="media-grid"><div class="media-preview">${imagePreview(media.src, media.title, media.type, media.poster)}</div><div class="media-inputs">${filePicker('更换图片或视频', 'media', index)}<span class="file-picked">${escapeHtml(media.src || '尚未选择文件')}</span>${media.type === 'video' ? `${filePicker('选择视频封面图片', 'poster', index)}<span class="file-picked">${escapeHtml(media.poster || '未选择封面，公开列表会显示播放占位符')}</span>` : ''}</div></div>
-      <div class="form-grid">${field('影像标题', 'title', media.title)}${field('影像说明', 'caption', media.caption || '', {long:true})}</div>
+      <div class="form-grid">${field('素材分组', 'group', media.group || '', {placeholder:'例如：仿真飞行、仿真数采、实机演示'})}${field('影像标题', 'title', media.title)}${field('影像说明', 'caption', media.caption || '', {long:true})}</div>
       <details><summary>文件路径和类型</summary><div class="form-grid"><label class="field"><span>类型</span><select data-media-field="type"><option value="video" ${media.type === 'video' ? 'selected' : ''}>视频</option><option value="image" ${media.type === 'image' ? 'selected' : ''}>图片</option></select></label>${field('文件路径', 'src', media.src)}${field('视频封面路径', 'poster', media.poster || '')}</div></details>
     </div>`).join('')}
     <div class="form-actions">${filePicker('＋ 添加图片或 MP4 视频', 'new-media')}<button type="button" data-add-media>添加外部路径</button></div>
@@ -265,7 +272,9 @@ function startUpload(files, kind, index = null) {
 }
 
 function updateActionAvailability() {
-  const disabled = exportBusy || pendingUploads.size > 0;
+  const disabled = publishing || exportBusy || pendingUploads.size > 0;
+  form.inert = publishing;
+  for (const id of ['publish-button', 'latest-button', 'restore-draft-button', 'import-button', 'download-button', 'copy-private-button', 'add-project']) document.getElementById(id).disabled = disabled;
   document.querySelector('#package-button').disabled = disabled;
   document.querySelector('#save-folder-button').disabled = disabled;
 }
@@ -523,25 +532,116 @@ for (const frame of [sitePreview, resumePreview]) frame.addEventListener('load',
 });
 
 try {
-  const response = await fetch('content.json');
+  const response = await fetch('content.json', {cache:'no-store'});
   if (!response.ok) throw new Error('无法读取 content.json');
   const published = await response.json();
   const publishedProblem = validateData(published);
   if (publishedProblem) throw new Error(`发布内容格式错误：${publishedProblem}`);
-  const draft = localStorage.getItem('portfolio-draft');
-  let draftData;
-  try { draftData = draft ? JSON.parse(draft) : null; } catch { draftData = null; }
-  const draftProblem = draftData ? validateData(draftData) : '';
-  if (draft && (!draftData || draftProblem)) localStorage.removeItem('portfolio-draft');
-  data = draftData && !draftProblem ? draftData : published;
+  savedRevision = response.headers.get('X-Content-Revision');
+  const restored = restoreDraft(published, validateData);
+  data = restored.data;
+  baseline = restored.baseline;
+  if (location.hostname === '127.0.0.1') {
+    try {
+      const result = await fetch('api/config', {cache:'no-store'});
+      if (result.ok) publishConfig = await result.json();
+    } catch { /* 普通静态预览不具备发布服务。 */ }
+  }
+  document.querySelector('#editor-initials').textContent = data.profile.initials || 'PI';
+  document.querySelector('#restore-draft-button').hidden = !localStorage.getItem('portfolio-last-draft-backup');
+  document.querySelector('#publish-button').textContent = publishConfig?.available ? '保存并发布 ↗' : '打开本机发布编辑台 ↗';
+  document.querySelector('#publish-label').textContent = publishConfig?.available ? '一键发布已连接' : '在线草稿与本机发布';
+  const guide = publishConfig?.available
+    ? '修改文字或上传素材 → 检查网页与简历预览 → 保存并发布。发布完成后公开网站与 PDF 自动更新，姓名和邮箱仍不进入源码。'
+    : '公开编辑页可预览草稿、备份内容。在本机运行“启动编辑台.sh”，使用本机编辑台的“保存并发布”自动更新 GitHub Pages 与 PDF。';
+  document.querySelector('#publish-description').textContent = guide;
+  document.querySelector('#publish-guide').textContent = guide;
+  if (publishConfig?.publicUrl) document.querySelector('.header-actions a').href = publishConfig.publicUrl;
   try {
     for (const record of await loadMediaFiles()) {
       uploaded.set(record.path, record);
       objectUrls.set(record.path, URL.createObjectURL(record.file));
     }
-  } catch { notify('浏览器未能读取已选素材；请在导出前重新选择文件。', true); }
-  saveState.textContent = draftData && !draftProblem ? '已载入本地草稿' : draft ? '草稿损坏，已载入发布版' : '已载入发布版';
+  } catch { notify('浏览器未能读取已选素材；请在发布前重新选择文件。', true); }
+  saveState.textContent = restored.restored ? '已恢复当前版本草稿' : '已载入最新内容';
+  if (restored.archived) notify('已载入最新内容；旧草稿已备份，可点击“恢复已备份草稿”查看。');
   render(false);
 } catch (error) {
   form.innerHTML = `<p>加载失败：${escapeHtml(error.message)}。请通过网站地址或本地服务器打开编辑器。</p>`;
+  document.querySelector('#publish-button').disabled = true;
 }
+
+function showPublishStatus(message, state = 'running', link = '') {
+  const element = document.querySelector('#publish-status');
+  element.hidden = false;
+  element.dataset.state = state;
+  element.textContent = message;
+  if (/^https:\/\/github\.com\/[\w.-]+\/[\w.-]+\/actions\/runs\/\d+$/.test(link)) {
+    const anchor = document.createElement('a');
+    anchor.href = link; anchor.textContent = '查看发布记录 ↗'; anchor.target = '_blank'; anchor.rel = 'noopener'; element.append(anchor);
+  }
+}
+
+async function apiRequest(path, options = {}) {
+  const response = await fetch(path, {...options, cache:'no-store', headers:{'X-Editor-Token':publishConfig.token, ...options.headers}});
+  const result = await response.json();
+  if (!response.ok) throw new Error(result.error || '保存失败，请重试');
+  return result;
+}
+
+async function watchPublish(job) {
+  while (true) {
+    showPublishStatus(job.message, job.status, job.workflowUrl);
+    if (job.status === 'error') throw new Error(job.message);
+    if (job.status === 'success') {
+      saveState.textContent = '已发布 · 网页与 PDF 已同步';
+      document.querySelector('.preview-footer span').textContent = '已发布 · 公开网页与 PDF 已同步';
+      announceSaved();
+      return;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const next = await apiRequest('api/status');
+    if (next.id !== job.id) throw new Error('发布状态已变化，请载入最新内容后检查');
+    job = next;
+  }
+}
+
+document.querySelector('#publish-button').addEventListener('click', async () => {
+  if (!publishConfig?.available) {
+    window.open('http://127.0.0.1:8771/editor.html', '_blank', 'noopener');
+    showPublishStatus('请先在本机运行项目目录中的“启动编辑台.sh”，然后在打开的本机编辑页保存并发布。此页的草稿仍保留。');
+    return;
+  }
+  publishing = true; updateActionAvailability();
+  try {
+    showPublishStatus('正在检查内容与上传素材');
+    const entries = await publishEntries();
+    for (const [path, file] of entries.slice(1)) await apiRequest('api/media/' + path, {method:'PUT', body:file});
+    const job = await apiRequest('api/publish', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({content:data, revision:savedRevision})});
+    savedRevision = job.revision;
+    baseline = contentSignature(data);
+    saveDraft(); announceSaved();
+    await watchPublish(job);
+  } catch (error) {
+    saveState.textContent = '发布未完成 · 草稿已保留';
+    showPublishStatus(error.message, 'error'); notify(error.message, true);
+  } finally { publishing = false; updateActionAvailability(); }
+});
+
+document.querySelector('#latest-button').addEventListener('click', () => {
+  if (contentSignature(data) !== baseline && !confirm('当前未发布草稿将先备份，再载入最新内容。继续吗？')) return;
+  archiveDraft(JSON.stringify(data));
+  localStorage.removeItem('portfolio-draft-base');
+  location.reload();
+});
+
+document.querySelector('#restore-draft-button').addEventListener('click', () => {
+  try {
+    const key = localStorage.getItem('portfolio-last-draft-backup');
+    const draft = JSON.parse(localStorage.getItem(key));
+    const problem = validateData(draft);
+    if (problem) throw new Error(problem);
+    data = draft; projectIndex = 0; saveDraft(); render(false);
+    notify('已恢复备份供核对；请检查后再发布。');
+  } catch (error) { notify('无法恢复草稿：' + error.message, true); }
+});

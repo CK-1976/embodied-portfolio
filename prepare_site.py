@@ -28,7 +28,9 @@ def prepare(site: Path, profile_file: Path | None = None) -> None:
     for filename in ("index.html", "editor.html", "resume.html"):
         path = site / filename
         document = path.read_text(encoding="utf-8")
-        path.write_text(document.replace("__PORTFOLIO_NAME__", html.escape(private["name"], quote=True)), encoding="utf-8")
+        document = document.replace("__PORTFOLIO_NAME__", html.escape(private["name"], quote=True))
+        document = document.replace("__PORTFOLIO_INITIALS__", html.escape(private.get("initials", "PI"), quote=True))
+        path.write_text(document, encoding="utf-8")
     print("已准备站点个人资料")
 
 

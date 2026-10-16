@@ -33,7 +33,7 @@ jobs:
           PORTFOLIO_PRIVATE_PROFILE: ${{ secrets.PORTFOLIO_PRIVATE_PROFILE }}
         run: |
           mkdir -p _site
-          cp index.html app.js styles.css resume.html resume.js resume.css editor.html editor.js editor.css editor-storage.js content.json _site/
+          cp index.html app.js styles.css resume.html resume.js resume.css editor.html editor.js editor.css editor-storage.js content-state.js content.json _site/
           cp -R assets _site/
           python3 prepare_site.py --site _site
           python3 build_pdf.py --site _site --chrome "${{ steps.chrome.outputs.chrome-path }}" --chromedriver "${{ steps.chrome.outputs.chromedriver-path }}"

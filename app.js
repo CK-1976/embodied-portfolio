@@ -1,3 +1,4 @@
+import {previewDraft, watchPublished} from './content-state.js';
 import {loadMediaFiles} from './editor-storage.js';
 
 const root = document.querySelector('#app');
@@ -58,12 +59,18 @@ function visual(project) {
 
 function mediaGallery(project) {
   if (!project.media?.length) return '';
+  const groups = new Map();
+  project.media.forEach((item, index) => {
+    const name = item.group || '项目素材';
+    if (!groups.has(name)) groups.set(name, []);
+    groups.get(name).push({item, index});
+  });
   return `<div class="media-gallery" aria-label="${escapeHtml(project.title)}演示素材">
     <div class="media-gallery-head"><span>项目影像</span><small>${project.media.length.toString().padStart(2, '0')} ITEMS</small></div>
-    <div class="media-list">${project.media.map((item, index) => `<button class="media-item" type="button" data-project="${escapeHtml(project.id)}" data-media="${index}">
+    ${Array.from(groups, ([name, items]) => `<section class="media-group"><h4>${escapeHtml(name)}</h4><div class="media-list">${items.map(({item, index}) => `<button class="media-item" type="button" data-project="${escapeHtml(project.id)}" data-media="${index}">
       <span class="media-thumb">${item.type === 'image' || item.poster || project.cover ? `<img src="${safeUrl(item.type === 'image' ? item.src : item.poster || project.cover)}" alt="" loading="lazy" />` : '<span class="media-placeholder" aria-hidden="true">▶</span>'}<span class="media-type">${item.type === 'video' ? '▶ VIDEO' : '↗ IMAGE'}</span></span>
       <span class="media-caption">${escapeHtml(item.title)}</span>
-    </button>`).join('')}</div>
+    </button>`).join('')}</div></section>`).join('')}
   </div>`;
 }
 
@@ -101,7 +108,7 @@ function render(data) {
   const resumeAttributes = previewMode ? 'target="_blank" rel="noopener"' : 'download';
   root.innerHTML = `
     <header class="site-header"><div class="shell header-inner">
-      <a class="brand" href="#top" aria-label="返回首页"><span class="brand-mark">${escapeHtml(profile.initials || 'CY')}<span class="brand-dot"></span></span><span class="brand-text">${escapeHtml(profile.name)}<small>PORTFOLIO / 2026</small></span></a>
+      <a class="brand" href="#top" aria-label="返回首页"><span class="brand-mark">${escapeHtml(profile.initials || 'CZY')}<span class="brand-dot"></span></span><span class="brand-text">${escapeHtml(profile.name)}<small>PORTFOLIO / 2026</small></span></a>
       <nav class="site-nav" aria-label="主导航">${(data.navigation || []).map((item) => `<a href="${safeUrl(item.href)}">${escapeHtml(item.label)}</a>`).join('')}</nav>
       <a class="header-action" href="${resumeHref}" ${resumeAttributes}>${previewMode ? '打印草稿' : '下载简历'} <span aria-hidden="true">↓</span></a>
     </div></header>
@@ -151,17 +158,24 @@ dialog.addEventListener('close', () => { dialogContent.innerHTML = ''; });
 dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
 
 try {
-  const response = await fetch('content.json');
+  const response = await fetch('content.json', {cache:'no-store'});
   if (!response.ok) throw new Error('内容文件无法读取');
   const published = await response.json();
   publishedData = published;
-  const preview = new URLSearchParams(location.search).has('preview') ? localStorage.getItem('portfolio-draft') : null;
-  let draft;
-  try { draft = preview ? JSON.parse(preview) : null; } catch { draft = null; }
+  const preview = new URLSearchParams(location.search).has('preview');
   if (preview) {
     try { setPreviewFiles(await loadMediaFiles()); } catch { /* 浏览器草稿仍可显示文字。 */ }
   }
-  render(draft?.profile && Array.isArray(draft.projects) && draft.projects.every((project) => project && typeof project === 'object') ? draft : published);
+  render(preview ? previewDraft(published) : published);
+  if (!preview) watchPublished(published, (next) => {
+    const expanded = Array.from(document.querySelectorAll('.project-card')).flatMap((card) => Array.from(card.querySelectorAll('details')).map((item, index) => item.open ? {card:card.id, index} : null).filter(Boolean));
+    const filter = document.querySelector('.filter-button.active')?.dataset.filter;
+    const scroll = window.scrollY;
+    publishedData = next; render(next);
+    for (const item of expanded) { const element = document.getElementById(item.card)?.querySelectorAll('details')[item.index]; if (element) element.open = true; }
+    const button = Array.from(document.querySelectorAll('.filter-button')).find((item) => item.dataset.filter === filter);
+    button?.click(); window.scrollTo(0, scroll);
+  });
 } catch (error) {
   root.innerHTML = `<main class="error-state"><h1>内容加载失败</h1><p>请通过本地服务器打开网站，并检查 content.json 是否存在。</p><small>${escapeHtml(error.message)}</small></main>`;
 }
