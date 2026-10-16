@@ -1,3 +1,4 @@
+import {publishThroughLocal, receiveOnlineDraft} from './editor-publish.js';
 import {archiveDraft, contentSignature, restoreDraft, announceSaved} from './content-state.js';
 import {createPublishZip, deleteMediaFile, loadMediaFiles, saveMediaFile} from './editor-storage.js';
 
@@ -19,7 +20,11 @@ let data;
 let baseline;
 let savedRevision;
 let publishConfig;
+let serverBaseline;
+let publishProgress;
 let publishing = false;
+let importingDraft = false;
+let retryBase;
 let mode = 'profile';
 let projectIndex = 0;
 let mediaRevision = 0;
@@ -88,7 +93,8 @@ function saveDraft() {
     localStorage.setItem('portfolio-draft', JSON.stringify(data));
     localStorage.setItem('portfolio-draft-base', baseline);
     document.querySelector('#editor-initials').textContent = data.profile.initials || 'PI';
-    saveState.textContent = '草稿已保存 · 尚未发布';
+    saveState.textContent = '有未发布修改 · 草稿已保存';
+    document.querySelector('.preview-footer span').textContent = '草稿预览 · 尚未更新公开网站';
   } catch {
     saveState.textContent = '草稿保存失败';
     notify('浏览器存储空间不足，请及时下载发布包。', true);
@@ -271,9 +277,9 @@ function startUpload(files, kind, index = null) {
 }
 
 function updateActionAvailability() {
-  const disabled = publishing || exportBusy || pendingUploads.size > 0;
-  form.inert = publishing;
-  for (const id of ['publish-button', 'latest-button', 'restore-draft-button', 'import-button', 'download-button', 'copy-private-button', 'add-project']) document.getElementById(id).disabled = disabled;
+  const disabled = publishing || importingDraft || exportBusy || pendingUploads.size > 0;
+  form.inert = publishing || importingDraft;
+  for (const id of ['publish-button', 'header-publish', 'latest-button', 'restore-draft-button', 'import-button', 'download-button', 'copy-private-button', 'add-project']) document.getElementById(id).disabled = disabled;
   document.querySelector('#package-button').disabled = disabled;
   document.querySelector('#save-folder-button').disabled = disabled;
 }
@@ -305,7 +311,7 @@ async function pruneUnusedUploads() {
   }
 }
 
-async function publishEntries() {
+async function publishEntries({checkExisting = true} = {}) {
   await Promise.all(Array.from(pendingUploads));
   const snapshot = sourceSnapshot();
   const problem = validateData(snapshot);
@@ -316,7 +322,7 @@ async function publishEntries() {
   const selectedUploads = new Map(Array.from(paths).filter((path) => uploaded.has(path)).map((path) => [path, uploaded.get(path).file]));
   const missing = [];
   for (const path of paths) {
-    if (selectedUploads.has(path)) continue;
+    if (!checkExisting || selectedUploads.has(path)) continue;
     if (!path.startsWith('assets/')) continue;
     try {
       const response = await fetch(path, {method:'HEAD'});
@@ -540,6 +546,11 @@ try {
   const restored = restoreDraft(published, validateData);
   data = restored.data;
   baseline = restored.baseline;
+  serverBaseline = contentSignature(published);
+  try {
+    const retry = JSON.parse(localStorage.getItem('portfolio-publish-retry'));
+    if (retry?.publishedBase === baseline && typeof retry.acceptedBase === 'string') retryBase = retry.acceptedBase;
+  } catch { /* 无失败发布记录。 */ }
   if (location.hostname === '127.0.0.1') {
     try {
       const result = await fetch('api/config', {cache:'no-store'});
@@ -548,11 +559,11 @@ try {
   }
   document.querySelector('#editor-initials').textContent = data.profile.initials || 'PI';
   document.querySelector('#restore-draft-button').hidden = !localStorage.getItem('portfolio-last-draft-backup');
-  document.querySelector('#publish-button').textContent = publishConfig?.available ? '保存并发布 ↗' : '打开本机发布编辑台 ↗';
-  document.querySelector('#publish-label').textContent = publishConfig?.available ? '一键发布已连接' : '在线草稿与本机发布';
+  document.querySelector('#publish-button').textContent = '一键更新网页和 PDF ↗';
+  document.querySelector('#publish-label').textContent = publishConfig?.available ? '本机发布已连接' : '在线编辑 · 一键发布';
   const guide = publishConfig?.available
-    ? '修改文字或上传素材 → 检查网页与简历预览 → 保存并发布。发布完成后公开网站与 PDF 自动更新，姓名和邮箱仍不进入源码。'
-    : '公开编辑页可预览草稿、备份内容。在本机运行“启动编辑台.sh”，使用本机编辑台的“保存并发布”自动更新 GitHub Pages 与 PDF。';
+    ? '修改会先保存为草稿。点击“一键更新网页和 PDF”，本机自动上传素材、更新网站并生成简历；请等待显示“已发布”。'
+    : '修改会先保存为草稿。点击“一键更新网页和 PDF”，当前修改和新素材会自动传到本机服务并发布，完成后这里会显示结果。请在已安装发布服务的这台电脑使用。';
   document.querySelector('#publish-description').textContent = guide;
   document.querySelector('#publish-guide').textContent = guide;
   if (publishConfig?.publicUrl) document.querySelector('.header-actions a').href = publishConfig.publicUrl;
@@ -565,6 +576,40 @@ try {
   saveState.textContent = restored.restored ? '已恢复当前版本草稿' : '已载入最新内容';
   if (restored.archived) notify('已载入最新内容；旧草稿已备份，可点击“恢复已备份草稿”查看。');
   render(false);
+  if (publishConfig?.available) receiveOnlineDraft({
+    publicOrigin:new URL(publishConfig.publicUrl).origin,
+    accept:async (payload, progress) => {
+      const problem = validateData(payload?.content);
+      if (problem) throw new Error(problem);
+      if (payload.base !== serverBaseline && contentSignature(payload.content) !== serverBaseline) throw new Error('网站内容或本机内容已更新，请先在在线编辑页载入最新内容；当前草稿已保留。');
+      if (publishing || importingDraft) throw new Error('本机已有发布正在进行，请等待完成后重试。');
+      const files = payload.files || [];
+      if (!Array.isArray(files) || files.length > 100 || files.reduce((sum, item) => sum + (item?.file?.size || 0), 0) > 512 * 1024 * 1024) throw new Error('素材数量或总大小超过限制');
+      for (const item of files) {
+        if (!/^assets\/(images|video)\/[a-zA-Z0-9_-]+\.(jpg|jpeg|png|webp|mp4)$/i.test(item?.path || '') || !(item.file instanceof Blob) || item.file.size > 80 * 1024 * 1024) throw new Error('传入的素材格式不合法');
+      }
+      importingDraft = true; publishProgress = progress; updateActionAvailability();
+      try {
+        showPublishStatus('已收到在线草稿，正在保存新素材');
+        if (contentSignature(data) !== baseline) archiveDraft(JSON.stringify(data));
+        for (const item of files) {
+          await saveMediaFile(item.path, item.file);
+          uploaded.set(item.path, item);
+          if (objectUrls.has(item.path)) URL.revokeObjectURL(objectUrls.get(item.path));
+          objectUrls.set(item.path, URL.createObjectURL(item.file));
+        }
+        mediaRevision += 1;
+        data = payload.content; mode = 'profile'; projectIndex = 0;
+        saveDraft(); render(false);
+        importingDraft = false; publishProgress = null;
+        return await publishCurrent(progress);
+      } finally {
+        importingDraft = false; updateActionAvailability();
+        if (!publishing) publishProgress = null;
+      }
+    },
+    onError:(error) => showPublishStatus(error.message, 'error')
+  });
 } catch (error) {
   form.innerHTML = `<p>加载失败：${escapeHtml(error.message)}。请通过网站地址或本地服务器打开编辑器。</p>`;
   document.querySelector('#publish-button').disabled = true;
@@ -575,6 +620,7 @@ function showPublishStatus(message, state = 'running', link = '') {
   element.hidden = false;
   element.dataset.state = state;
   element.textContent = message;
+  publishProgress?.({message, status:state, workflowUrl:link});
   if (/^https:\/\/github\.com\/[\w.-]+\/[\w.-]+\/actions\/runs\/\d+$/.test(link)) {
     const anchor = document.createElement('a');
     anchor.href = link; anchor.textContent = '查看发布记录 ↗'; anchor.target = '_blank'; anchor.rel = 'noopener'; element.append(anchor);
@@ -596,7 +642,7 @@ async function watchPublish(job) {
       saveState.textContent = '已发布 · 网页与 PDF 已同步';
       document.querySelector('.preview-footer span').textContent = '已发布 · 公开网页与 PDF 已同步';
       announceSaved();
-      return;
+      return job;
     }
     await new Promise((resolve) => setTimeout(resolve, 2000));
     const next = await apiRequest('api/status');
@@ -605,27 +651,59 @@ async function watchPublish(job) {
   }
 }
 
-document.querySelector('#publish-button').addEventListener('click', async () => {
-  if (!publishConfig?.available) {
-    window.open('http://127.0.0.1:8771/editor.html', '_blank', 'noopener');
-    showPublishStatus('请先在本机运行项目目录中的“启动编辑台.sh”，然后在打开的本机编辑页保存并发布。此页的草稿仍保留。');
-    return;
-  }
-  publishing = true; updateActionAvailability();
+function publishedSuccessfully() {
+  retryBase = null; localStorage.removeItem('portfolio-publish-retry');
+  baseline = contentSignature(data);
+  serverBaseline = baseline;
+  saveDraft();
+  saveState.textContent = '已发布 · 网页与 PDF 已同步';
+  document.querySelector('.preview-footer span').textContent = '已发布 · 公开网页与 PDF 已同步';
+  announceSaved();
+}
+
+async function publishCurrent(progress) {
+  if (publishing) throw new Error('发布正在进行，请稍候');
+  publishing = true; publishProgress = progress; updateActionAvailability();
+  saveState.textContent = '正在更新网站与 PDF…';
   try {
-    showPublishStatus('正在检查内容与上传素材');
-    const entries = await publishEntries();
-    for (const [path, file] of entries.slice(1)) await apiRequest('api/media/' + path, {method:'PUT', body:file});
-    const job = await apiRequest('api/publish', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({content:data, revision:savedRevision})});
-    savedRevision = job.revision;
-    baseline = contentSignature(data);
-    saveDraft(); announceSaved();
-    await watchPublish(job);
+    let job;
+    if (!publishConfig?.available) {
+      job = await publishThroughLocal({
+        prepare:async () => {
+          const entries = await publishEntries({checkExisting:false});
+          return {content:structuredClone(data), base:retryBase || baseline, files:entries.slice(1).map(([path, file]) => ({path, file}))};
+        },
+        onProgress:(state) => {
+          if (typeof state.acceptedBase === 'string') {
+            retryBase = state.acceptedBase;
+            localStorage.setItem('portfolio-publish-retry', JSON.stringify({publishedBase:baseline, acceptedBase:retryBase}));
+          }
+          showPublishStatus(state.message, state.status, state.workflowUrl);
+        }
+      });
+    } else {
+      showPublishStatus('正在检查内容与上传素材');
+      const entries = await publishEntries();
+      for (const [path, file] of entries.slice(1)) await apiRequest('api/media/' + path, {method:'PUT', body:file});
+      job = await apiRequest('api/publish', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({content:data, revision:savedRevision})});
+      savedRevision = job.revision;
+      publishProgress?.({message:job.message, status:'running', acceptedBase:contentSignature(data)});
+      baseline = contentSignature(data); serverBaseline = baseline;
+      saveDraft(); announceSaved();
+      job = await watchPublish(job);
+    }
+    publishedSuccessfully();
+    showPublishStatus(job.message || '已发布，公开网页和简历 PDF 已同步', 'success', job.workflowUrl);
+    return job;
   } catch (error) {
-    saveState.textContent = '发布未完成 · 草稿已保留';
+    saveState.textContent = '未发布成功 · 草稿已保留';
     showPublishStatus(error.message, 'error'); notify(error.message, true);
-  } finally { publishing = false; updateActionAvailability(); }
-});
+    throw error;
+  } finally { publishing = false; publishProgress = null; updateActionAvailability(); }
+}
+
+document.querySelector('#publish-button').addEventListener('click', () => { void publishCurrent().catch(() => {}); });
+document.querySelector('#header-publish').addEventListener('click', () => document.querySelector('#publish-button').click());
 
 document.querySelector('#latest-button').addEventListener('click', () => {
   if (contentSignature(data) !== baseline && !confirm('当前未发布草稿将先备份，再载入最新内容。继续吗？')) return;

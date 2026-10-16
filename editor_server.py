@@ -24,7 +24,7 @@ PRIVATE_FIELDS = ('name', 'initials', 'email', 'emailAlt', 'phone')
 PUBLIC_PROFILE = dict(zip(PRIVATE_FIELDS, ('作品集作者', 'PI', '', '', '')))
 STATIC_FILES = {
     'index.html', 'editor.html', 'resume.html', 'app.js', 'styles.css',
-    'editor.js', 'editor.css', 'editor-storage.js', 'content-state.js',
+    'editor.js', 'editor.css', 'editor-storage.js', 'editor-publish.js', 'content-state.js',
     'resume.js', 'resume.css',
 }
 
@@ -139,10 +139,24 @@ class EditorApplication:
         self.public_url = f'https://{owner.lower()}.github.io/{name}/'
 
     def command(self, *args, input_text=None, timeout=60):
-        result = subprocess.run(args, cwd=self.repo, input=input_text, text=True, capture_output=True, timeout=timeout)
-        if result.returncode:
-            raise EditorError('GitHub 或 Git 操作失败，请检查本机登录、网络及仓库权限；已保存内容可以重试发布')
-        return result.stdout
+        retryable = args[0] == 'gh' or args[:2] == ('git', 'push')
+        attempts = 3 if retryable else 1
+        for attempt in range(attempts):
+            try:
+                result = subprocess.run(args, cwd=self.repo, input=input_text, text=True, capture_output=True, timeout=timeout)
+                if not result.returncode:
+                    return result.stdout
+                temporary = any(marker in result.stderr.lower() for marker in (
+                    'tls handshake timeout', 'connection reset', 'connection timed out',
+                    'temporary failure', 'unexpected eof', 'context deadline exceeded',
+                    'http 502', 'http 503', 'http 504', 'network is unreachable',
+                ))
+            except subprocess.TimeoutExpired:
+                temporary = True
+            if not retryable or not temporary or attempt == attempts - 1:
+                raise EditorError('GitHub 或 Git 操作失败，请检查本机登录、网络及仓库权限；已保存内容可以重试发布')
+            self.progress('网络连接暂时中断，正在自动重试') if self.job else None
+            time.sleep(2 ** (attempt + 1))
 
     def snapshot(self):
         with self.lock:
@@ -400,6 +414,17 @@ def main():
     parser.add_argument('--port', type=int, default=8771)
     parser.add_argument('--open', action='store_true')
     args = parser.parse_args()
+    if args.open:
+        existing = f'http://127.0.0.1:{args.port}/editor.html'
+        try:
+            with urlopen(existing.replace('editor.html', 'api/config'), timeout=2) as response:
+                ready = json.load(response).get('available')
+            if ready:
+                webbrowser.open(existing)
+                print('本机发布服务已运行，已打开编辑页。', flush=True)
+                return
+        except (OSError, ValueError):
+            pass
     profile = args.profile_file or args.repo.parent / 'portfolio-private-profile.json'
     if not profile.is_file():
         parser.error('缺少仓库外的个人资料文件，请先配置私密资料')

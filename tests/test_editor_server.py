@@ -4,6 +4,8 @@ import json
 import tempfile
 import threading
 import unittest
+from unittest.mock import patch
+import subprocess
 from pathlib import Path
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
@@ -140,6 +142,14 @@ class EditorTests(unittest.TestCase):
         module.EditorApplication.publish(self.app, self.app.snapshot()[0], {'assets/images/test.jpg'})
         self.assertEqual(self.app.job['status'], 'error')
         self.assertIn(('git','reset','HEAD','--','content.json','assets/images/test.jpg'), calls)
+
+    def test_temporary_github_network_failure_is_retried(self):
+        failure = subprocess.CompletedProcess([], 1, '', 'net/http: TLS handshake timeout')
+        success = subprocess.CompletedProcess([], 0, 'ok', '')
+        with patch.object(module.subprocess, 'run', side_effect=[failure, success]) as command, patch.object(module.time, 'sleep'):
+            result = module.EditorApplication.command(self.app, 'gh', 'run', 'list')
+        self.assertEqual(result, 'ok')
+        self.assertEqual(command.call_count, 2)
 
     def test_video_range_and_pdf_download(self):
         folder=self.repo/'assets/video';folder.mkdir(parents=True)

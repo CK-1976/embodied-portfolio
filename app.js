@@ -99,12 +99,19 @@ function projectCard(project) {
   </article>`;
 }
 
+// 使用当前内容生成下载版本，避免发布后浏览器继续使用旧 PDF 缓存。
+function contentVersion(data) {
+  let value = 2166136261;
+  for (const character of JSON.stringify(data)) value = Math.imul(value ^ character.charCodeAt(0), 16777619);
+  return (value >>> 0).toString(16);
+}
+
 function render(data) {
   const profile = data.profile;
   const projects = (data.projects || []).filter((item) => item.visible !== false);
   const categories = ['全部', ...new Set(projects.map((project) => project.category))];
   const previewMode = new URLSearchParams(location.search).has('preview');
-  const resumeHref = previewMode ? 'resume.html?preview=1&print=1' : 'assets/resume.pdf';
+  const resumeHref = previewMode ? 'resume.html?preview=1&print=1' : 'assets/resume.pdf?v=' + contentVersion(data);
   const resumeAttributes = previewMode ? 'target="_blank" rel="noopener"' : 'download';
   root.innerHTML = `
     <header class="site-header"><div class="shell header-inner">
