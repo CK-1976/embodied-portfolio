@@ -188,14 +188,6 @@
         },
         {
           "type": "video",
-          "src": "assets/video/navigation-right-full.mp4",
-          "poster": "assets/images/navigation-right.jpg",
-          "title": "向右导航",
-          "caption": "Isaac Lab 仿真完整录像 · 2 分 56.2 秒 · 原速",
-          "group": "仿真飞行"
-        },
-        {
-          "type": "video",
           "src": "assets/video/target-left-full.mp4",
           "poster": "assets/images/target-left.jpg",
           "title": "飞向左侧箱子",
@@ -366,15 +358,16 @@
         "零件打印",
         "实物组装"
       ],
-      "cover": "assets/images/dexterous-hand.jpg",
-      "coverAlt": "桌面上的灵巧手实物演示画面",
+      "cover": "assets/images/dexterous-hand-complete.jpg",
+      "coverAlt": "已打印组装的灵巧手正面实物照片",
       "media": [
         {
           "type": "video",
-          "src": "assets/video/dexterous-hand-full.mp4",
-          "poster": "assets/images/dexterous-hand.jpg",
-          "title": "灵巧手实物演示",
-          "caption": "灵巧手实物完整录像 · 30.7 秒 · 原速；由 HEVC 转为浏览器兼容格式，保留完整内容"
+          "src": "assets/video/dexterous-hand-complete.mp4",
+          "poster": "assets/images/dexterous-hand-complete.jpg",
+          "title": "灵巧手完整实物演示",
+          "caption": "灵巧手实物与动作演示 · 58.3 秒 · 四段完整视频拼接，保留原速与原有声音",
+          "group": "实物演示"
         }
       ]
     }
