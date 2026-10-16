@@ -140,10 +140,10 @@
       "media": [
         {
           "type": "video",
-          "src": "assets/video/uav-chair-inspection.mp4",
+          "src": "assets/video/uav-chair-inspection-full.mp4",
           "poster": "assets/images/uav-chair-inspection.jpg",
           "title": "实机：导航至蓝色椅子并环绕采集",
-          "caption": "P230 实机录像 · 2 分 49 秒 · 原速，已移除现场音轨；后续视频为仿真演示",
+          "caption": "P230 实机完整录像 · 2 分 49 秒 · 原速",
           "group": "实机演示"
         },
         {
@@ -151,7 +151,7 @@
           "src": "assets/video/uav-sim-flight-red.mp4",
           "poster": "assets/images/uav-sim-flight-red.jpg",
           "title": "仿真飞行 · raw2red",
-          "caption": "仿真飞行完整录像 · 23.4 秒 · 原速，无音轨",
+          "caption": "仿真飞行完整录像 · 23.4 秒 · 原速",
           "group": "仿真飞行"
         },
         {
@@ -159,63 +159,63 @@
           "src": "assets/video/uav-sim-flight-white.mp4",
           "poster": "assets/images/uav-sim-flight-white.jpg",
           "title": "仿真飞行 · raw2white",
-          "caption": "仿真飞行完整录像 · 30 秒 · 原速，公开副本无音轨",
+          "caption": "仿真飞行完整录像 · 30 秒 · 原速",
           "group": "仿真飞行"
         },
         {
           "type": "video",
-          "src": "assets/video/uav-sim-capture-1.mp4",
+          "src": "assets/video/uav-sim-capture-1-full.mp4",
           "poster": "assets/images/uav-sim-capture-1.jpg",
           "title": "仿真数采 · 演示一",
-          "caption": "仿真数采完整录像 · 1 分 13.4 秒 · 原速，公开副本无音轨",
+          "caption": "仿真数采完整录像 · 1 分 13.4 秒 · 原速",
           "group": "仿真数采"
         },
         {
           "type": "video",
-          "src": "assets/video/uav-sim-capture-2.mp4",
+          "src": "assets/video/uav-sim-capture-2-full.mp4",
           "poster": "assets/images/uav-sim-capture-2.jpg",
           "title": "仿真数采 · 演示二",
-          "caption": "仿真数采完整录像 · 1 分 13.4 秒 · 原速，公开副本无音轨",
+          "caption": "仿真数采完整录像 · 1 分 13.4 秒 · 原速",
           "group": "仿真数采"
         },
         {
           "type": "video",
-          "src": "assets/video/navigation-orbit.mp4",
+          "src": "assets/video/navigation-orbit-full.mp4",
           "poster": "assets/images/navigation-orbit.jpg",
           "title": "导航并环绕",
-          "caption": "Isaac Lab 仿真录屏节选 · 25 秒",
+          "caption": "Isaac Lab 仿真完整录像 · 2 分 38.9 秒 · 原速",
           "group": "仿真数采"
         },
         {
           "type": "video",
-          "src": "assets/video/navigation-right.mp4",
+          "src": "assets/video/navigation-right-full.mp4",
           "poster": "assets/images/navigation-right.jpg",
           "title": "向右导航",
-          "caption": "Isaac Lab 仿真录屏节选 · 25 秒",
+          "caption": "Isaac Lab 仿真完整录像 · 2 分 56.2 秒 · 原速",
           "group": "仿真飞行"
         },
         {
           "type": "video",
-          "src": "assets/video/target-left.mp4",
+          "src": "assets/video/target-left-full.mp4",
           "poster": "assets/images/target-left.jpg",
           "title": "飞向左侧箱子",
-          "caption": "目标定位与路径演示节选 · 22 秒",
+          "caption": "目标定位与路径完整录像 · 1 分 35.3 秒 · 原速",
           "group": "仿真飞行"
         },
         {
           "type": "video",
-          "src": "assets/video/target-right.mp4",
+          "src": "assets/video/target-right-full.mp4",
           "poster": "assets/images/target-right.jpg",
           "title": "飞向右侧箱子",
-          "caption": "目标定位与路径演示节选 · 22 秒",
+          "caption": "目标定位与路径完整录像 · 1 分 9.2 秒 · 原速",
           "group": "仿真飞行"
         },
         {
           "type": "video",
-          "src": "assets/video/target-case.mp4",
+          "src": "assets/video/target-case-full.mp4",
           "poster": "assets/images/target-case.jpg",
           "title": "飞向黑色手提箱",
-          "caption": "目标定位与路径演示节选 · 22 秒",
+          "caption": "目标定位与路径完整录像 · 54.9 秒 · 原速",
           "group": "仿真飞行"
         },
         {
@@ -371,10 +371,10 @@
       "media": [
         {
           "type": "video",
-          "src": "assets/video/dexterous-hand.mp4",
+          "src": "assets/video/dexterous-hand-full.mp4",
           "poster": "assets/images/dexterous-hand.jpg",
           "title": "灵巧手实物演示",
-          "caption": "原始素材节选 · 25 秒"
+          "caption": "灵巧手实物完整录像 · 30.7 秒 · 原速；由 HEVC 转为浏览器兼容格式，保留完整内容"
         }
       ]
     }
