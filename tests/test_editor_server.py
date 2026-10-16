@@ -77,6 +77,11 @@ class EditorTests(unittest.TestCase):
         self.assertEqual(self.request('/api/config', headers={'Host':'evil.invalid'})[0], 400)
         self.assertEqual(self.request('/api/config', headers={'Sec-Fetch-Site':'cross-site'})[0], 400)
 
+    def test_public_page_can_open_local_editor_but_not_api(self):
+        headers={'Sec-Fetch-Site':'cross-site', 'Sec-Fetch-Mode':'navigate', 'Sec-Fetch-Dest':'document'}
+        self.assertEqual(self.request('/index.html',headers=headers)[0],200)
+        self.assertEqual(self.request('/api/config',headers=headers)[0],400)
+
     def test_write_requires_origin_and_token(self):
         for headers in ({}, {'Origin':'https://evil.invalid','X-Editor-Token':self.app.token}, {'Origin':self.url}):
             self.assertNotEqual(self.request('/api/publish', 'POST', b'{}', headers)[0], 202)

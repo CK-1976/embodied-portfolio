@@ -281,7 +281,12 @@ def make_handler(application):
             if self.headers.get('Host') != origin.removeprefix('http://'):
                 raise EditorError('请通过本机编辑台地址访问')
             if self.headers.get('Sec-Fetch-Site') == 'cross-site':
-                raise EditorError('不接受其他网站发起的请求')
+                # 允许公开编辑页打开本机页面，接口和后台请求仍拒绝跨站访问。
+                navigation = (not mutation and self.headers.get('Sec-Fetch-Mode') == 'navigate'
+                              and self.headers.get('Sec-Fetch-Dest') == 'document'
+                              and urlsplit(self.path).path in ('/', '/editor.html', '/index.html', '/resume.html'))
+                if not navigation:
+                    raise EditorError('不接受其他网站发起的请求')
             if mutation and (self.headers.get('Origin') != origin or not secrets.compare_digest(self.headers.get('X-Editor-Token', ''), application.token)):
                 raise EditorError('编辑台校验失败，请刷新本机页面')
 
