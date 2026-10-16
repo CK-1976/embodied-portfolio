@@ -12,7 +12,8 @@
     "location": "重庆 · 求职成都",
     "education": "重庆师范大学 · 智能科学与技术 · 本科（2026 届）",
     "resumeSummary": "具有无人机语言导航与多模态 AI 工程实践，完成 Isaac Lab 仿真适配、P230 实机导航集成，以及 RTX 3090 上的 Qwen 模型部署。",
-    "updated": "2026-10"
+    "updated": "2026-10",
+    "phone": ""
   },
   "navigation": [
     {
@@ -150,7 +151,7 @@
           "src": "assets/video/uav-sim-flight-red.mp4",
           "poster": "assets/images/uav-sim-flight-red.jpg",
           "title": "仿真飞行 · raw2red",
-          "caption": "仿真飞行完整录像 · 23.4 秒 · 原速，公开副本无音轨",
+          "caption": "仿真飞行完整录像 · 23.4 秒 · 原速，无音轨",
           "group": "仿真飞行"
         },
         {
