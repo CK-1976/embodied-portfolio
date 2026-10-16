@@ -148,6 +148,38 @@
         },
         {
           "type": "video",
+          "src": "assets/video/navigation-orbit-full.mp4",
+          "poster": "assets/images/navigation-orbit.jpg",
+          "title": "导航并环绕",
+          "caption": "实机控制网页完整录像 · 2 分 38.9 秒 · 原速",
+          "group": "实机演示"
+        },
+        {
+          "type": "video",
+          "src": "assets/video/target-left-full.mp4",
+          "poster": "assets/images/target-left.jpg",
+          "title": "飞向左侧箱子",
+          "caption": "实机控制网页完整录像 · 1 分 35.3 秒 · 原速",
+          "group": "实机演示"
+        },
+        {
+          "type": "video",
+          "src": "assets/video/target-right-full.mp4",
+          "poster": "assets/images/target-right.jpg",
+          "title": "飞向右侧箱子",
+          "caption": "实机控制网页完整录像 · 1 分 9.2 秒 · 原速",
+          "group": "实机演示"
+        },
+        {
+          "type": "video",
+          "src": "assets/video/target-case-full.mp4",
+          "poster": "assets/images/target-case.jpg",
+          "title": "飞向黑色手提箱",
+          "caption": "实机控制网页完整录像 · 54.9 秒 · 原速",
+          "group": "实机演示"
+        },
+        {
+          "type": "video",
           "src": "assets/video/uav-sim-flight-red.mp4",
           "poster": "assets/images/uav-sim-flight-red.jpg",
           "title": "仿真飞行 · raw2red",
@@ -179,50 +211,25 @@
           "group": "仿真数采"
         },
         {
-          "type": "video",
-          "src": "assets/video/navigation-orbit-full.mp4",
-          "poster": "assets/images/navigation-orbit.jpg",
-          "title": "导航并环绕",
-          "caption": "Isaac Lab 仿真完整录像 · 2 分 38.9 秒 · 原速",
-          "group": "仿真数采"
+          "type": "image",
+          "src": "assets/images/p230.jpg",
+          "title": "正面",
+          "caption": "P230 无人机正面实物照片",
+          "group": "无人机实物"
         },
         {
-          "type": "video",
-          "src": "assets/video/target-left-full.mp4",
-          "poster": "assets/images/target-left.jpg",
-          "title": "飞向左侧箱子",
-          "caption": "目标定位与路径完整录像 · 1 分 35.3 秒 · 原速",
-          "group": "仿真飞行"
-        },
-        {
-          "type": "video",
-          "src": "assets/video/target-right-full.mp4",
-          "poster": "assets/images/target-right.jpg",
-          "title": "飞向右侧箱子",
-          "caption": "目标定位与路径完整录像 · 1 分 9.2 秒 · 原速",
-          "group": "仿真飞行"
-        },
-        {
-          "type": "video",
-          "src": "assets/video/target-case-full.mp4",
-          "poster": "assets/images/target-case.jpg",
-          "title": "飞向黑色手提箱",
-          "caption": "目标定位与路径完整录像 · 54.9 秒 · 原速",
-          "group": "仿真飞行"
+          "type": "image",
+          "src": "assets/images/p230-top.jpg",
+          "title": "俯视图",
+          "caption": "P230 无人机俯视实物照片",
+          "group": "无人机实物"
         },
         {
           "type": "image",
           "src": "assets/images/drone-hardware.webp",
-          "title": "无人机硬件",
-          "caption": "项目相关设备照片",
-          "group": "项目图片"
-        },
-        {
-          "type": "image",
-          "src": "assets/images/p230.jpg",
-          "title": "P230 无人机实物",
-          "caption": "语言导航与环绕采集使用的 P230 平台正面照片",
-          "group": "项目图片"
+          "title": "背面",
+          "caption": "P230 无人机背面实物照片",
+          "group": "无人机实物"
         }
       ]
     },
@@ -358,15 +365,15 @@
         "零件打印",
         "实物组装"
       ],
-      "cover": "assets/images/dexterous-hand-complete.jpg",
+      "cover": "assets/images/dexterous-hand-123-81416f83a8.jpg",
       "coverAlt": "已打印组装的灵巧手正面实物照片",
       "media": [
         {
           "type": "video",
-          "src": "assets/video/dexterous-hand-complete.mp4",
-          "poster": "assets/images/dexterous-hand-complete.jpg",
+          "src": "assets/video/dexterous-hand-123-81416f83a8.mp4",
+          "poster": "assets/images/dexterous-hand-123-81416f83a8.jpg",
           "title": "灵巧手完整实物演示",
-          "caption": "灵巧手实物与动作演示 · 58.3 秒 · 四段完整视频拼接，保留原速与原有声音",
+          "caption": "灵巧手实物与动作演示 · 24.7 秒 · 按 1 → 2 → 3 拼接，保留各段完整时长、原速与原有声音",
           "group": "实物演示"
         }
       ]
