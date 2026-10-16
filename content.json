@@ -182,7 +182,7 @@
           "type": "video",
           "src": "assets/video/uav-sim-flight-red.mp4",
           "poster": "assets/images/uav-sim-flight-red.jpg",
-          "title": "仿真飞行 · raw2red",
+          "title": "飞向红车",
           "caption": "仿真飞行完整录像 · 23.4 秒 · 原速",
           "group": "仿真飞行"
         },
@@ -190,7 +190,7 @@
           "type": "video",
           "src": "assets/video/uav-sim-flight-white.mp4",
           "poster": "assets/images/uav-sim-flight-white.jpg",
-          "title": "仿真飞行 · raw2white",
+          "title": "飞向白车",
           "caption": "仿真飞行完整录像 · 30 秒 · 原速",
           "group": "仿真飞行"
         },
