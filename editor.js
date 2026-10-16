@@ -34,7 +34,7 @@ function validateData(value) {
   if (!Array.isArray(value.projects) || !value.projects.every((project) => isRecord(project) && typeof project.id === 'string' && typeof project.title === 'string' && Array.isArray(project.tags) && Array.isArray(project.contributions) && Array.isArray(project.resumeBullets) && Array.isArray(project.media) && project.media.every(isRecord))) return '项目列表格式错误';
   if (!Array.isArray(value.experiences) || !value.experiences.every((experience) => isRecord(experience) && Array.isArray(experience.bullets))) return '工作经历格式错误';
   if (!Array.isArray(value.capabilities) || !value.capabilities.every((capability) => isRecord(capability) && Array.isArray(capability.tags))) return '能力列表格式错误';
-  if (!Array.isArray(value.certificates) || !Array.isArray(value.navigation) || !value.navigation.every((item) => isRecord(item) && typeof item.label === 'string' && typeof item.href === 'string')) return '证书或导航格式错误';
+  if (!Array.isArray(value.certificates) || !Array.isArray(value.navigation) || !value.navigation.every((item) => isRecord(item) && typeof item.label === 'string' && typeof item.href === 'string')) return '导航或内容列表格式错误';
   return '';
 }
 
@@ -146,7 +146,7 @@ function renderExperiences() {
 }
 
 function renderSkills() {
-  title.textContent = '能力与证书';
+  title.textContent = '能力设置';
   description.textContent = '能力名称和技术标签会进入简历，描述显示在网站能力地图。';
   form.innerHTML = `<section class="form-section">${sectionHeading('能力地图', '网站 + 简历')}
     ${data.capabilities.map((capability, index) => `<div class="experience-edit" data-capability="${index}"><div class="experience-heading"><h3>${escapeHtml(capability.title || `能力 ${index + 1}`)}</h3><button type="button" class="minor-button" data-remove-capability="${index}">删除能力</button></div><div class="form-grid">
@@ -154,7 +154,6 @@ function renderSkills() {
       ${field('能力描述（网站显示）', 'description', capability.description, {long:true})}
       ${field('技术标签（网站与 PDF，逗号分隔）', 'tags', (capability.tags || []).join(', '), {array:'commas'})}
     </div></div>`).join('')}<div class="form-actions"><button type="button" data-add-capability>＋ 新增能力</button></div></section>
-    <section class="form-section">${sectionHeading('证书', '只显示在 PDF')}<div class="form-grid">${field('证书与语言能力（每行一项）', 'certificates', data.certificates || [], {long:true,array:'lines'})}</div></section>
     <section class="form-section">${sectionHeading('网站导航', '只显示在网站')}<div class="form-grid">${field('每行“标签|#锚点”', 'navigation', (data.navigation || []).map((item) => `${item.label}|${item.href}`).join('\n'), {long:true,array:'navigation'})}</div><p class="form-note">可用锚点：#projects、#capabilities、#experience、#contact。</p></section>`;
 }
 
