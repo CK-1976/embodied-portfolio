@@ -87,6 +87,9 @@ img { display: block; max-width: 100%; }
 .project-cover { position: relative; min-height: 290px; overflow: hidden; }
 .featured .project-cover { height: 100%; min-height: 640px; }
 .image-cover { background: #d9d5ca; }
+/* 普通卡片使用统一封面高度，避免竖图撑高整行并留下大块空白。 */
+.project-card:not(.featured) .image-cover { height: 300px; min-height: 0; }
+.project-card:not(.featured) .image-cover img { object-fit: contain; }
 .image-cover:after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(10,20,19,.35), transparent 42%, rgba(10,20,19,.3)); }
 .image-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
 .image-cover:hover img { transform: scale(1.035); }
@@ -248,6 +251,10 @@ img { display: block; max-width: 100%; }
   *, *:before, *:after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
 @media (min-width: 781px) {
+  /* 并排呈现普通卡片的素材分组，减少分组逐行堆叠产生的行间留白。 */
+  .project-card:not(.featured) .media-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); column-gap: 14px; }
+  .project-card:not(.featured) .media-gallery-head { grid-column: 1 / -1; }
+  .project-card:not(.featured) .media-group { margin-top: 12px; }
   /* 素材增加时保持封面比例，阅读项目经历时封面随滚动停留。 */
   .featured .image-cover { align-self:start; position:sticky; top:96px; height:640px; min-height:0; }
 }
