@@ -377,6 +377,70 @@
           "group": "实物演示"
         }
       ]
+    },
+    {
+      "id": "microduck",
+      "category": "机器人探索",
+      "featured": false,
+      "visible": true,
+      "includeInResume": false,
+      "eyebrow": "ROBOT LEARNING / 06",
+      "title": "MicroDuck 双足机器人复现",
+      "subtitle": "实物组装与行走策略训练",
+      "period": "",
+      "context": "开源项目复现",
+      "role": "实物组装、行走策略训练",
+      "summary": "基于开源 MicroDuck 项目完成双足机器人实物组装，并复现行走策略训练。通过实物视频与多角度照片展示机器人形态与组装成果。",
+      "challenge": "围绕双足机器人的行走任务，复现开源项目的硬件与策略训练流程。",
+      "approach": "组装 MicroDuck 机器人实物，基于开源训练工程开展行走策略训练。",
+      "outcome": "完成实物组装与行走模型训练，保留实物演示视频及正面、两侧照片。",
+      "contributions": [
+        "完成 MicroDuck 机器人实物组装",
+        "基于开源项目复现行走策略训练"
+      ],
+      "resumeBullets": [
+        "基于开源 MicroDuck 项目完成双足机器人实物组装，并复现行走策略训练。"
+      ],
+      "tags": [
+        "MicroDuck",
+        "双足机器人",
+        "强化学习",
+        "行走策略",
+        "实物组装"
+      ],
+      "cover": "assets/images/microduck-front.jpg",
+      "coverAlt": "组装完成的 MicroDuck 双足机器人正面实物照片",
+      "media": [
+        {
+          "type": "video",
+          "src": "assets/video/microduck-reproduction-full.mp4",
+          "poster": "assets/images/microduck-video-poster.jpg",
+          "title": "MicroDuck 实物演示",
+          "caption": "完整原视频约 10 秒，保留原速与原有声音，展示组装后的 MicroDuck 实物。",
+          "group": "实物演示"
+        },
+        {
+          "type": "image",
+          "src": "assets/images/microduck-front.jpg",
+          "title": "正面",
+          "caption": "组装完成的 MicroDuck 正面实物照片。",
+          "group": "实物照片"
+        },
+        {
+          "type": "image",
+          "src": "assets/images/microduck-left.jpg",
+          "title": "侧面一",
+          "caption": "原素材 microduck-左：机器人侧面结构与组装细节。",
+          "group": "实物照片"
+        },
+        {
+          "type": "image",
+          "src": "assets/images/microduck-right.jpg",
+          "title": "侧面二",
+          "caption": "原素材 microduck-右：机器人另一侧结构与组装细节。",
+          "group": "实物照片"
+        }
+      ]
     }
   ],
   "certificates": []
