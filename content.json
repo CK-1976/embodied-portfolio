@@ -390,16 +390,16 @@
       "period": "",
       "context": "开源项目复现",
       "role": "实物组装、行走策略训练",
-      "summary": "基于开源 MicroDuck 项目完成双足机器人实物组装，并复现行走策略训练。通过实物视频与多角度照片展示机器人形态与组装成果。",
+      "summary": "基于开源 MicroDuck 项目完成双足机器人实物组装，并复现行走策略训练。通过仿真行走录像展示策略效果，结合实物视频与多角度照片呈现硬件组装成果。",
       "challenge": "围绕双足机器人的行走任务，复现开源项目的硬件与策略训练流程。",
       "approach": "组装 MicroDuck 机器人实物，基于开源训练工程开展行走策略训练。",
-      "outcome": "完成实物组装与行走模型训练，保留实物演示视频及正面、两侧照片。",
+      "outcome": "完成实物组装与行走模型训练，提供仿真行走录像、实物演示视频及正面、两侧照片。",
       "contributions": [
         "完成 MicroDuck 机器人实物组装",
         "基于开源项目复现行走策略训练"
       ],
       "resumeBullets": [
-        "基于开源 MicroDuck 项目完成双足机器人实物组装，并复现行走策略训练。"
+        "基于开源 MicroDuck 项目完成双足机器人实物组装，复现行走策略训练并在仿真中演示行走效果。"
       ],
       "tags": [
         "MicroDuck",
@@ -418,6 +418,14 @@
           "title": "MicroDuck 实物演示",
           "caption": "完整原视频约 10 秒，保留原速与原有声音，展示组装后的 MicroDuck 实物。",
           "group": "实物演示"
+        },
+        {
+          "type": "video",
+          "src": "assets/video/microduck-sim-walking-full.mp4",
+          "poster": "assets/images/microduck-sim-walking-poster.jpg",
+          "title": "MicroDuck 仿真行走",
+          "caption": "仿真环境中的行走策略演示 · 42.1 秒 · 完整原视频，保留原速与原有声音。",
+          "group": "仿真行走"
         },
         {
           "type": "image",
