@@ -47,7 +47,7 @@ function visual(project) {
   const visualSteps = {
     vision: ['语言描述', 'Qwen-VL', 'Rex-Omni', '视觉定位'],
     grading: ['试卷上传', '题区分割', 'VLM 批改', '分析报告'],
-    water: ['河流拓扑', '时序观测', 'T-GCN', '预测 API']
+    water: ['已有模型', '调用封装', 'FastAPI', '业务系统']
   };
   const steps = visualSteps[project.visual] || ['输入', '分析', '执行', '结果'];
   return `<div class="project-cover diagram-cover diagram-${escapeHtml(project.visual || 'default')}" role="img" aria-label="${escapeHtml(steps.join('到'))}的流程示意">

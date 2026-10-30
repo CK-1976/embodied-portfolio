@@ -74,18 +74,18 @@
       "company": "超物智科（四川）科技有限公司",
       "role": "机器人算法工程师",
       "period": "2026.07.22 - 至今",
-      "description": "负责无人机语言导航的任务拆解、视觉定位与 P230 实机联调，完成灵巧手零件打印和组装。",
+      "description": "负责无人机语言导航与 P230 实机联调，完成 MicroDuck 实物组装和行走策略训练复现，以及灵巧手打印与组装。",
       "bullets": [
-        "负责无人机语言导航仿真适配与 P230 实机联调，完成灵巧手零件打印和组装。"
+        "负责无人机导航仿真与实机联调，完成 MicroDuck 组装、行走策略训练复现及灵巧手打印组装。"
       ]
     },
     {
       "company": "天润时代科技有限公司",
       "role": "大模型应用开发工程师",
       "period": "2025.05 - 2026.07.21",
-      "description": "负责视觉检测接口、AI 判卷后端及水质预测服务开发。",
+      "description": "负责视觉检测接口、AI 判卷后端及水质预测模型的接口封装。",
       "bullets": [
-        "开发视觉检测 Agent、AI 判卷后端及水质预测接口。"
+        "开发视觉检测 Agent、AI 判卷后端，封装水质预测模型接口。"
       ]
     },
     {
@@ -241,7 +241,7 @@
       "title": "MicroDuck 双足机器人复现",
       "subtitle": "实物组装与行走策略训练",
       "period": "2026",
-      "context": "开源项目复现",
+      "context": "超物智科（四川）科技有限公司",
       "role": "实物组装、行走策略训练",
       "summary": "完成 MicroDuck 双足机器人实物组装，基于开源 mjlab 工程和 PPO 复现行走策略训练，并在仿真中回放验证。",
       "challenge": "完成双足机器人硬件组装，并复现开源项目的行走策略训练。",
@@ -415,33 +415,32 @@
     },
     {
       "id": "watershed-forecast",
-      "category": "时空预测",
+      "category": "AI 工程",
       "featured": false,
       "visible": true,
       "includeInResume": true,
       "eyebrow": "MODEL TO SERVICE / 04",
       "title": "流域水质预测服务",
-      "subtitle": "河流图建模、时序预测与接口开发",
+      "subtitle": "已有模型接入与服务接口开发",
       "period": "2025 - 2026",
       "context": "天润时代科技有限公司",
-      "role": "预测算法与 API 封装",
-      "summary": "使用 T-GCN 预测水质指标，基于上下游关系构建河流有向图，提供训练与预测接口。",
-      "challenge": "仅用地理距离难以反映污染物沿河流的真实传输方向。",
-      "approach": "根据河道上下游关系构建图结构，结合时序观测训练 T-GCN，使用 FastAPI 提供训练和推理接口。",
-      "outcome": "完成水质预测模块及训练、预测接口开发。",
+      "role": "FastAPI 接口封装与工程化",
+      "summary": "接入已有 T-GCN 水质预测模型，将训练与预测过程封装为 FastAPI 接口，供业务系统调用。",
+      "challenge": "将已有算法代码接入业务系统，提供可调用的训练与预测服务。",
+      "approach": "接入已有模型代码，整理训练和预测调用流程，以 FastAPI 服务形式对接业务系统。",
+      "outcome": "完成训练与预测接口开发及业务系统接入。",
       "contributions": [
-        "构建基于河流上下游拓扑的有向图",
-        "实现 T-GCN 预测模型与训练流程",
-        "封装 FastAPI 训练及预测接口"
+        "封装已有模型的训练与预测调用",
+        "开发 FastAPI 接口并完成服务接入"
       ],
       "resumeBullets": [
-        "基于河流上下游拓扑构建有向图并实现 T-GCN 预测模型，使用 FastAPI 封装训练与预测接口。"
+        "接入已有 T-GCN 水质预测模型，使用 FastAPI 封装训练与预测接口，供业务系统调用。"
       ],
       "tags": [
-        "T-GCN",
-        "PyTorch",
         "FastAPI",
-        "时空图建模"
+        "模型服务化",
+        "接口开发",
+        "T-GCN 接入"
       ],
       "visual": "water",
       "media": []
