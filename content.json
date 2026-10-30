@@ -2,16 +2,16 @@
   "profile": {
     "name": "作品集作者",
     "initials": "PI",
-    "role": "机器人感知 / 多模态 AI 工程",
-    "headline": "让智能体，\n走出对话框。",
-    "intro": "关注语言导航、多模态感知与机器人系统落地。经历覆盖 Isaac Lab 仿真、RGB-D 航点生成、P230 无人机实机集成，以及模型部署与 API 交付。",
+    "role": "机器人算法工程师 / 多模态应用开发",
+    "headline": "机器人算法\n多模态应用开发",
+    "intro": "主要使用 Python 开发机器人与多模态应用。做过 P230 无人机语言导航、视觉检测服务和 AI 判卷后端，近期完成 MicroDuck 实物组装与行走策略训练复现。",
     "heroImage": "assets/images/p230.jpg",
     "email": "",
     "emailAlt": "",
     "website": "https://ck-1976.github.io/embodied-portfolio/",
     "location": "重庆 · 求职成都",
     "education": "重庆师范大学 · 智能科学与技术 · 本科（2026 届）",
-    "resumeSummary": "具有无人机语言导航与多模态 AI 工程实践，完成 Isaac Lab 仿真适配、P230 实机导航集成，以及 RTX 3090 上的 Qwen 模型部署。",
+    "resumeSummary": "主要使用 Python 开发机器人与多模态应用，有 P230 无人机实机联调、视觉检测服务开发及 MicroDuck 行走策略训练复现经验。",
     "updated": "2026-10",
     "phone": ""
   },
@@ -36,30 +36,31 @@
   "capabilities": [
     {
       "number": "01",
-      "title": "导航与机器人系统",
-      "description": "结合语言任务编排、视觉打点与 RGB-D 几何处理生成导航航点，连接 EGO-Planner 和无人机执行模块，并开展仿真与实机联调。",
+      "title": "机器人导航与仿真",
+      "description": "根据视觉打点、深度和相机内参计算航点，对接无人机导航与任务状态；使用 Isaac Lab 进行仿真，复现 MicroDuck 行走策略训练。",
       "tags": [
-        "ROS1",
         "RGB-D",
+        "ROS/rosbridge",
         "EGO-Planner",
-        "Isaac Lab"
+        "Isaac Lab",
+        "MuJoCo / PPO"
       ]
     },
     {
       "number": "02",
-      "title": "多模态感知",
-      "description": "应用视觉语言模型与目标检测处理语言指代和视觉定位，使用 vLLM 在 RTX 3090 上部署 Qwen，并实现视觉分析服务。",
+      "title": "多模态模型应用",
+      "description": "使用 Qwen 提取任务和检测目标，将 Rex-Omni 封装为检测接口；使用 vLLM 部署模型，通过 LangGraph 调用检测工具。",
       "tags": [
         "Qwen",
         "vLLM",
         "Rex-Omni",
-        "视觉定位"
+        "LangGraph"
       ]
     },
     {
       "number": "03",
-      "title": "系统与交付",
-      "description": "将模型能力封装为服务，处理异步任务、环境隔离、数据流水线与部署问题。",
+      "title": "Python 后端开发",
+      "description": "使用 FastAPI 开发模型接口，处理并行任务、结果存储和报告生成，使用 Docker 部署服务。",
       "tags": [
         "Python",
         "FastAPI",
@@ -72,31 +73,28 @@
     {
       "company": "超物智科（四川）科技有限公司",
       "role": "机器人算法工程师",
-      "period": "2026.07.22 — 至今",
-      "description": "与上一段经历为同一负责人团队的连续任职；开展无人机语言导航仿真与 P230 实机集成，并完成灵巧手零件打印与组装。",
+      "period": "2026.07.22 - 至今",
+      "description": "负责无人机语言导航的任务拆解、视觉定位与 P230 实机联调，完成灵巧手零件打印和组装。",
       "bullets": [
-        "开展无人机语言导航仿真适配与 P230 实机联调",
-        "完成灵巧手零件打印和实物组装"
+        "负责无人机语言导航仿真适配与 P230 实机联调，完成灵巧手零件打印和组装。"
       ]
     },
     {
       "company": "天润时代科技有限公司",
       "role": "大模型应用开发工程师",
-      "period": "2025.05 — 2026.07.21",
-      "description": "参与 AI 教育、无人机巡检与水质监测等场景的算法落地和 API 开发。",
+      "period": "2025.05 - 2026.07.21",
+      "description": "负责视觉检测接口、AI 判卷后端及水质预测服务开发。",
       "bullets": [
-        "构建视觉分析 Agent 的云端语义理解与本地检测链路",
-        "交付 AI 判卷流水线及水质预测服务模块"
+        "开发视觉检测 Agent、AI 判卷后端及水质预测接口。"
       ]
     },
     {
       "company": "重庆中联信息产业有限公司",
       "role": "全栈开发工程师",
-      "period": "2024.08 — 2025.02",
-      "description": "参与医疗数据采集系统重构和 AI 文件管理系统开发。",
+      "period": "2024.08 - 2025.02",
+      "description": "参与医疗数据采集系统重构和文档管理系统开发。",
       "bullets": [
-        "开发异构医疗数据转换逻辑，支撑 300 余家医院部署",
-        "带领 3 人团队开发文档智能分类与标签功能"
+        "开发异构医疗数据转换逻辑，以及文档智能分类与标签功能。"
       ]
     }
   ],
@@ -109,23 +107,23 @@
       "includeInResume": true,
       "eyebrow": "FEATURED PROJECT / 01",
       "title": "无人机语言导航与环绕采集",
-      "subtitle": "从语言指令、视觉定位到实机导航与采集",
+      "subtitle": "语言指令驱动的目标导航与环绕采集",
       "period": "2026.07 起",
-      "context": "超物智科（四川）科技有限公司 · 项目经历",
-      "role": "任务编排、RGB-D 航点生成与实机集成",
-      "summary": "基于 Qwen3.8-27B 量化模型拆解语言任务并定位图像目标，结合 RGB-D 和相机内参生成航点，通过 ROS/rosbridge 对接 P230 无人机、EGO-Planner 导航与已有环绕控制。保留 Isaac Lab 仿真和实机演示。",
-      "challenge": "语言任务需要转换为可执行的导航目标；模型推理延迟、RGB-D 与位姿时间对应，以及导航和环绕的控制交接都会影响执行。",
-      "approach": "采用规则与模型结合的任务拆解并校验结构化输出。将视觉打点与对齐深度反投影为目标前停距的相机系航点，交给机载桥使用采集时刻 TF 转换到世界系并接入 EGO。收到导航完成回执后，再启动已有 YOLO 跟踪和规则环绕控制。",
-      "outcome": "完成 Isaac Lab 仿真演示，保留 P230 无人机导航至蓝色椅子并环绕采集的实机录像与任务记录。导航避障由 EGO 负责；环绕复用已有视觉控制，未接入 EGO 路径避障。",
+      "context": "超物智科（四川）科技有限公司",
+      "role": "任务拆解、RGB-D 航点计算与实机联调",
+      "summary": "使用 Qwen 拆解导航与采集指令，在图像中定位目标，结合 RGB-D 计算航点，通过 ROS/rosbridge 对接 P230 无人机。已完成仿真与实机导航、环绕采集演示。",
+      "challenge": "将“飞向目标并环绕采集”等指令拆成可执行任务，处理图像、深度和位姿的时间对应，以及导航与环绕之间的控制交接。",
+      "approach": "调用 Qwen 拆解任务并输出目标像素位置，结合对齐深度和相机内参计算相机坐标系航点。机载桥使用拍摄时刻的 TF 转为世界坐标，再交给 EGO-Planner；收到当前任务完成回执后，调用已有环绕模块。",
+      "outcome": "P230 实机完成导航至蓝色椅子并环绕采集。导航使用 EGO-Planner，环绕使用机载已有的 YOLO 跟踪与控制程序。",
       "contributions": [
-        "实现语言任务拆解、视觉打点接口、RGB-D 航点生成、ROS 对接及任务状态管理，并负责实机调试",
-        "使用 vLLM 在 RTX 3090 上部署 Qwen3.8-27B 社区量化模型；对比本地 Qwen3.5-9B 与云端 Qwen 服务，结合复杂指令打点表现、响应延迟及离线要求选择模型，调整提示词和非思考模式",
-        "集成无人机已有 EGO-Planner、VINS/PX4 与 YOLO 模块，接入原有环绕控制并串联导航与采集任务",
-        "完成 Isaac Lab 导航仿真适配，保留不同目标指令的演示素材"
+        "实现任务拆解、视觉打点接口、RGB-D 航点计算和任务状态管理，负责 ROS 对接与实机调试",
+        "使用 vLLM 在 RTX 3090 上部署 Qwen 27B 量化模型，对比本地 9B 模型与云端服务，调整提示词和推理配置",
+        "对接无人机已有 EGO-Planner、VINS/PX4、YOLO 和环绕模块，串联导航与采集任务",
+        "完成 Isaac Lab 导航仿真适配，测试不同目标指令"
       ],
       "resumeBullets": [
-        "实现 Qwen 任务拆解与视觉打点，经 RGB-D 反投影和历史 TF 生成航点，通过 ROS/rosbridge 集成 P230 与 EGO-Planner。",
-        "用 vLLM 在 RTX 3090 部署 Qwen3.8-27B 量化模型，调整提示词与非思考模式，接入已有 YOLO 和环绕控制完成实机采集。"
+        "实现语言任务拆解、视觉打点与任务状态管理，结合 RGB-D 和拍摄时刻 TF 计算航点，通过 ROS/rosbridge 对接 P230 与 EGO-Planner。",
+        "使用 vLLM 在 RTX 3090 部署 Qwen 量化模型，完成导航与已有环绕模块的衔接及实机联调。"
       ],
       "tags": [
         "Qwen3.8-27B",
@@ -238,29 +236,28 @@
       "category": "机器人探索",
       "featured": false,
       "visible": true,
-      "includeInResume": false,
+      "includeInResume": true,
       "eyebrow": "ROBOT LEARNING / 06",
       "title": "MicroDuck 双足机器人复现",
       "subtitle": "实物组装与行走策略训练",
-      "period": "",
+      "period": "2026",
       "context": "开源项目复现",
       "role": "实物组装、行走策略训练",
-      "summary": "基于开源 MicroDuck 项目完成双足机器人实物组装，并复现行走策略训练。通过仿真行走录像展示策略效果，结合实物视频与多角度照片呈现硬件组装成果。",
-      "challenge": "围绕双足机器人的行走任务，复现开源项目的硬件与策略训练流程。",
-      "approach": "组装 MicroDuck 机器人实物，基于开源训练工程开展行走策略训练。",
-      "outcome": "完成实物组装与行走模型训练，提供仿真行走录像、实物演示视频及正面、两侧照片。",
+      "summary": "完成 MicroDuck 双足机器人实物组装，基于开源 mjlab 工程和 PPO 复现行走策略训练，并在仿真中回放验证。",
+      "challenge": "完成双足机器人硬件组装，并复现开源项目的行走策略训练。",
+      "approach": "按照开源硬件方案组装实物，使用 mjlab（MuJoCo Warp）训练环境和 PPO 训练行走策略，再通过仿真回放观察步态。",
+      "outcome": "完成实物组装和行走策略训练复现，已录制仿真行走及实物演示视频。",
       "contributions": [
         "完成 MicroDuck 机器人实物组装",
-        "基于开源项目复现行走策略训练"
+        "基于 mjlab 和 PPO 复现行走策略训练，并进行仿真回放验证"
       ],
       "resumeBullets": [
-        "基于开源 MicroDuck 项目完成双足机器人实物组装，复现行走策略训练并在仿真中演示行走效果。"
+        "完成 MicroDuck 实物组装，基于 mjlab（MuJoCo Warp）与 PPO 复现行走策略训练，并在仿真中回放验证。"
       ],
       "tags": [
         "MicroDuck",
-        "双足机器人",
-        "强化学习",
-        "行走策略",
+        "MuJoCo",
+        "PPO",
         "实物组装"
       ],
       "cover": "assets/images/microduck-front.jpg",
@@ -286,21 +283,21 @@
           "type": "image",
           "src": "assets/images/microduck-front.jpg",
           "title": "正面",
-          "caption": "组装完成的 MicroDuck 正面实物照片。",
+          "caption": "MicroDuck 正面实物照片。",
           "group": "实物照片"
         },
         {
           "type": "image",
           "src": "assets/images/microduck-left.jpg",
           "title": "侧面一",
-          "caption": "原素材 microduck-左：机器人侧面结构与组装细节。",
+          "caption": "MicroDuck 侧面结构与组装细节。",
           "group": "实物照片"
         },
         {
           "type": "image",
           "src": "assets/images/microduck-right.jpg",
           "title": "侧面二",
-          "caption": "原素材 microduck-右：机器人另一侧结构与组装细节。",
+          "caption": "MicroDuck 另一侧结构与组装细节。",
           "group": "实物照片"
         }
       ]
@@ -312,15 +309,15 @@
       "visible": true,
       "includeInResume": false,
       "eyebrow": "EXPLORATION / 05",
-      "title": "灵巧手交互演示",
+      "title": "灵巧手实物组装",
       "subtitle": "零件打印、实物组装与演示",
       "period": "2026.07 起",
-      "context": "超物智科（四川）科技有限公司 · 补充演示素材",
+      "context": "超物智科（四川）科技有限公司",
       "role": "零件打印与实物组装",
-      "summary": "完成灵巧手零件打印和实物组装，保留实物演示影像。原计划开展的训练工作尚未进行。",
+      "summary": "负责灵巧手零件打印与实物组装，视频展示组装后的外观和动作。",
       "challenge": "",
       "approach": "",
-      "outcome": "完成实物组装；训练尚未开展，因此不将训练成果写入简历。",
+      "outcome": "完成零件打印与实物组装。",
       "contributions": [
         "完成灵巧手零件打印",
         "完成灵巧手实物组装"
@@ -352,25 +349,24 @@
       "includeInResume": true,
       "eyebrow": "MULTIMODAL SYSTEM / 02",
       "title": "无人机视觉分析 Agent",
-      "subtitle": "从对话目标提取到开放词汇检测与结果解释",
-      "period": "2025 — 2026",
-      "context": "天润时代科技有限公司 · 项目经历",
+      "subtitle": "对话目标提取与开放词汇目标检测",
+      "period": "2025 - 2026",
+      "context": "天润时代科技有限公司",
       "role": "检测接口封装、目标提取与工具编排",
-      "summary": "使用 Qwen 从自然语言对话提取检测目标，调用本地 Rex-Omni 的 FastAPI 服务返回检测框与标注图，面向中文、英文及混合描述组织目标类别，并保存会话上下文。",
-      "challenge": "对话中的目标描述不能直接作为检测接口参数，需要保留颜色、状态等关键修饰词，提取多个检测目标，并处理中文、英文和混合表达。",
-      "approach": "将 Rex-Omni 封装为 FastAPI 检测服务，用提示词引导 Qwen 提取目标描述，通过工具调用以图片与逗号分隔的 categories 字符串请求检测。使用 LangGraph 串联模型、检测工具和结果解释，将坐标与标注图交回模型继续回答。 后端另实现物体样张注册：按图像框裁剪并保存到 MinIO，提供基于样张的视觉提示检测支路。",
-      "outcome": "形成对话目标提取、检测接口调用和结果解释的完整链路。使用 Apifox 对耳机与小零件完成样张保存、重启读取和换图检测的后端接口测试。",
+      "summary": "用户上传图片并描述检测目标后，由 Qwen 提取目标名称和属性，调用 Rex-Omni 检测接口，返回检测框、标注图及说明。负责接口开发、工具调用和部署。",
+      "challenge": "从中英文对话中提取多个检测目标，保留颜色、状态等属性，并转换为检测接口需要的参数。",
+      "approach": "用 FastAPI 封装 Rex-Omni，使用 LangGraph 串联 Qwen 与检测工具。另开发物体样张注册接口，将裁剪样张存入 MinIO，检测时以样张作为视觉提示。",
+      "outcome": "完成对话检测服务，并在公司 A100 上使用 Docker 部署。样张注册与检测后端已用 Apifox 测试，覆盖保存、重启读取和换图检测；该功能尚未接入聊天前端。",
       "contributions": [
-        "将 Rex-Omni 目标检测封装为可调用的 FastAPI 服务，并对接图片上传、类别参数及检测结果",
-        "设计 Qwen 目标提取与工具调用提示词，保留关键属性，并处理中文、英文及混合描述",
-        "使用 LangGraph 编排模型与检测工具，将检测坐标和标注图交给模型生成解释",
-        "实现 MinIO 样张注册与视觉提示检测后端支路，用 Apifox 测试样张保存、重启读取和换图检测，前端对接待完成",
-        "接入会话上下文保存，使用 Docker 在公司 A100 环境部署服务，并用 Docker Compose 组织检测与 Agent 服务"
+        "将 Rex-Omni 封装为 FastAPI 服务，处理图片、目标类别和检测结果",
+        "编写 Qwen 目标提取提示词，处理中文、英文及混合描述中的目标属性",
+        "使用 LangGraph 调用检测工具，将坐标和标注图交给模型生成回答",
+        "实现 MinIO 样张注册和样张检测后端，用 Apifox 测试保存、重启读取和换图检测",
+        "保存会话上下文，使用 Docker 和 Docker Compose 在 A100 环境部署服务"
       ],
       "resumeBullets": [
-        "封装 Rex-Omni 的 FastAPI 检测接口，用 Qwen 从中英文对话提取目标描述，通过工具调用返回检测框和标注图。",
-        "用 LangGraph 编排模型与检测工具、保存会话上下文，使用 Docker 在 A100 环境部署服务。",
-        "实现 MinIO 样张注册与视觉提示检测后端，用 Apifox 完成保存、重启读取及换图检测测试。"
+        "将 Rex-Omni 封装为 FastAPI 检测服务，通过 Qwen 提取中英文目标，使用 LangGraph 调用检测工具并返回坐标与标注图。",
+        "实现 MinIO 样张注册与检测后端，用 Apifox 测试保存、重启读取及换图检测；使用 Docker 在 A100 部署服务。"
       ],
       "tags": [
         "Qwen-VL",
@@ -391,22 +387,22 @@
       "includeInResume": true,
       "eyebrow": "AI ENGINEERING / 03",
       "title": "AI 判卷系统",
-      "subtitle": "从试卷上传到批改与分析报告",
-      "period": "2025 — 2026",
-      "context": "天润时代科技有限公司 · 项目经历",
+      "subtitle": "试卷处理、自动批改与报告后端",
+      "period": "2025 - 2026",
+      "context": "天润时代科技有限公司",
       "role": "Python 判卷后端开发",
-      "summary": "负责标准卷与学生卷上传、题区分割、VLM 批改及分析报告数据生成，项目已与合作小学开展试用。",
-      "challenge": "批量试卷需要保持题区、页码、题号与作答的对应，并将批改结果组织为可查看的分析数据。",
-      "approach": "集成 MinerU 解析题区并进行裁剪与坐标映射，调用 VLM 提取作答和批改；以线程池调度试卷级处理，保存题级结果并汇总分析报告数据。",
-      "outcome": "已与合作小学开展试用，形成答卷结果、题区得分和个人/知识点报告的业务流程。与负责 Java 权限管理及前端的同事协作完成交付。",
+      "summary": "负责标准卷与学生卷上传、题区分割、跨页拼接、视觉模型批改和报告数据生成。系统已在合作小学试用。",
+      "challenge": "同一道题的题干、问题和作答可能跨越多页，需要正确匹配题号与题区，再完成裁剪、拼接和批改。",
+      "approach": "集成 MinerU 解析题区，结合页码、题号和坐标裁剪并拼接图像；调用视觉模型识别作答、匹配标准答案并批改，使用线程池调度多份试卷，保存题级结果和报告数据。",
+      "outcome": "系统已在合作小学试用，可查看题区得分、个人成绩与知识点报告。负责 Python 判卷后端，Java 权限管理与前端由同事完成。",
       "contributions": [
-        "实现标准卷与学生卷上传、题区分割和裁剪，集成 MinerU 并处理坐标映射",
-        "实现 VLM 作答提取与批改流程，调度试卷级并行处理并记录题级结果",
-        "生成成绩、知识点与错题分析所需的后端报告数据"
+        "实现标准卷、学生卷上传及题区裁剪，处理跨页题目归属、坐标映射和图像拼接",
+        "集成视觉模型完成作答提取与批改，使用线程池调度试卷处理并记录题级结果",
+        "生成成绩、知识点与错题分析所需的报告数据"
       ],
       "resumeBullets": [
-        "负责标准卷与学生卷上传、题区分割和 VLM 批改，集成 MinerU 并实现坐标映射与试卷级并行处理。",
-        "实现批改结果记录与分析报告数据生成，项目已与合作小学开展试用。"
+        "负责标准卷、学生卷上传及题区处理，集成 MinerU，处理跨页题目归属与图像拼接；使用视觉模型识别作答并批改。",
+        "通过线程池处理多份试卷，保存题级结果并生成成绩、知识点与错题报告数据；系统已在合作小学试用。"
       ],
       "tags": [
         "VLM",
@@ -424,15 +420,15 @@
       "visible": true,
       "includeInResume": true,
       "eyebrow": "MODEL TO SERVICE / 04",
-      "title": "流域水质预测引擎",
-      "subtitle": "让时空预测模型成为可调用服务",
-      "period": "2025 — 2026",
-      "context": "天润时代科技有限公司 · 项目经历",
+      "title": "流域水质预测服务",
+      "subtitle": "河流图建模、时序预测与接口开发",
+      "period": "2025 - 2026",
+      "context": "天润时代科技有限公司",
       "role": "预测算法与 API 封装",
-      "summary": "基于 T-GCN 搭建水质预测模型，用河流上下游关系构建有向图，并提供训练与预测接口。",
+      "summary": "使用 T-GCN 预测水质指标，基于上下游关系构建河流有向图，提供训练与预测接口。",
       "challenge": "仅用地理距离难以反映污染物沿河流的真实传输方向。",
-      "approach": "把河道拓扑编码为有向图，再结合时序数据建模；用 FastAPI 封装训练和推理能力。",
-      "outcome": "完成核心预测模块与服务接口交付，支持按需触发训练和预测。",
+      "approach": "根据河道上下游关系构建图结构，结合时序观测训练 T-GCN，使用 FastAPI 提供训练和推理接口。",
+      "outcome": "完成水质预测模块及训练、预测接口开发。",
       "contributions": [
         "构建基于河流上下游拓扑的有向图",
         "实现 T-GCN 预测模型与训练流程",
